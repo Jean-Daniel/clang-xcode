@@ -1,16 +1,16 @@
 /**
-    LLVM compiler 4.1 build task
+    Clang Nightly build task
 
     Copyright (c) 2000-2012 Apple Inc.  All rights reserved.
 */
 
 (
     {
-        Identifier = "com.apple.compilers.llvm.clang.1_0";
+        Identifier = "com.apple.compilers.llvm.clang.nightly";
         Type = Compiler;
         Class = "XCCompilerSpecificationClang";
-        Name = "Apple LLVM compiler 4.1";
-        Description = "Apple LLVM compiler 4.1";
+        Name = "Clang Nightly";
+        Description = "Clang Nightly Build";
         Vendor = Apple;
         Version = "3.0";
         IsAbstract = NO;
@@ -27,7 +27,7 @@
             sdk,
         );
         BuiltinJambaseRuleName = ProcessC;
-        ExecPath = "clang";
+        ExecPath = "$(CLANG)";
         UseCPlusPlusCompilerDriverWhenBundlizing = Yes;
         CommandOutputParser = "XCSimpleBufferedCommandOutputParser";
         SupportsHeadermaps = Yes;
@@ -48,6 +48,12 @@
         );
         MessageCategoryInfoOptions = ( "--print-diagnostic-categories" );
         Options = (
+            {
+                Name = CLANG;
+                Type = Path;
+                DefaultValue = "clang";
+                Category = Base;
+            },
             {
                 Name = arch;
                 Type = String;
@@ -152,7 +158,10 @@
                     "compiler-default" = ();
                     /* We need these two entries that reference c++0x to
                        maintain compatibility of old build settings. */
-                    "c++0x" = ( "-std=c++11" );
+                    "c++0x" = (
+                        "-std=c++11",
+                        "-U__STRICT_ANSI__",
+                    );
                     "gnu++0x" = ( "-std=gnu++11" );
                     /* Default for everything else. */
                     "<<otherwise>>" = (
@@ -233,6 +242,29 @@
                     "sourcecode.cpp.objcpp",
                 );
                 Category = Language;
+            },
+            {
+                Name = "CLANG_ENABLE_SANITIZER";
+                Type = Enumeration;
+                AllowedValues = (
+                    disabled,
+                    thread,
+                    address,
+                    undefined,
+                );
+                DefaultValue = disabled;
+                CommandLineArgs = {
+                  "disabled" = ();
+                  // vptr support is broken on OS X as it generate ref to non exported libc++abi symbols.
+                  "undefined" = ( "-fsanitizer=undefined -fno-sanitize=vptr" );
+                  "<<otherwise>>" = ( "-fsanitizer=$(value)" );
+                };
+                // Required to tell the linker what runtime lib is required
+                AdditionalLinkerArgs = {
+                  "disabled" = ();
+                  "<<otherwise>>" = ( "-fsanitizer=$(value)" );
+                };
+                Category = CodeGeneration;
             },
             {
                 Name = "CLANG_LINK_OBJC_RUNTIME";
@@ -1762,11 +1794,11 @@
     },
     
     {
-        Identifier = "com.apple.compilers.llvm.clang.1_0.compiler";
+        Identifier = "com.apple.compilers.llvm.clang.nightly.compiler";
         Type = Compiler;
-        BasedOn = "com.apple.compilers.llvm.clang.1_0";
-        Name = "Apple LLVM compiler 4.1";
-        Description = "Apple LLVM compiler 4.1";
+        BasedOn = "com.apple.compilers.llvm.clang.nightly";
+        Name = "Clang Nightly";
+        Description = "Clang Nightly Build";
         IsAbstract = YES;
         ShowInCompilerSelectionPopup = NO;
         Architectures = (
@@ -1790,11 +1822,11 @@
     },
     
     {
-        Identifier = "com.apple.compilers.llvm.clang.1_0.analyzer";
+        Identifier = "com.apple.compilers.llvm.clang.nightly.analyzer";
         Type = Compiler;
-        BasedOn = "com.apple.compilers.llvm.clang.1_0";
+        BasedOn = "com.apple.compilers.llvm.clang.nightly";
         Name = "Static Analyzer";
-        Description = "Apple Clang Static Analyzer 3.0";
+        Description = "Clang Static Analyzer Nightly Build";
         Architectures = (
             i386,
             "x86_64",

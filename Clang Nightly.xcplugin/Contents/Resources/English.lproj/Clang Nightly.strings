@@ -1,5 +1,5 @@
 ﻿//
-// Clang LLVM 1.0
+// Clang Nightly
 // Xcode Compiler Specification
 // English localization
 //
@@ -8,12 +8,17 @@
 
 // Localized strings for basic info
 
-"Name" = "Clang LLVM 1.0";
-"Description" = "Apple Clang LLVM Compiler 1.0";
-"Version" = "1.0";
+"Name" = "Clang Nightly";
+"Description" = "Clang Compiler Nightly Build";
+"Version" = "3.2";
 "Vendor" = "Apple";
 
 // Localized strings for compiler options
+
+"[Base]-category" = "Base";
+
+"[CLANG]-name" = "Clang compiler path";
+"[CLANG]-description" = "Path of the clang compiler to use. [CLANG]";
 
 "[Preprocessing]-category" = "Preprocessing";
 
@@ -590,6 +595,13 @@ manual reference counting (i.e., traditional \"retain\" and \"release\" messages
 incompatible with compiling code to use Objective-C Garbage Collection.";
 "[CLANG_ENABLE_OBJC_ARC]-value-[YES]" = "Use automated reference counting";
 "[CLANG_ENABLE_OBJC_ARC]-value-[NO]" = "Use manual (traditional) reference counting";
+
+"[CLANG_ENABLE_SANITIZER]-name" = "Enable Sanitizer";
+"[CLANG_ENABLE_SANITIZER]-description" = "Enable Clang Sanitizer. Generate extra code to detect runtime errors.";
+"[CLANG_ENABLE_SANITIZER]-value-[disabled]" = "No";
+"[CLANG_ENABLE_SANITIZER]-value-[thread]" = "Thread Sanitizer";
+"[CLANG_ENABLE_SANITIZER]-value-[address]" = "Address Sanitizer";
+"[CLANG_ENABLE_SANITIZER]-value-[undefined]" = "Undefined Behaviors";
 
 "[CLANG_LINK_OBJC_RUNTIME]-name" = "Implicitly Link Objective-C Runtime Support";
 "[CLANG_LINK_OBJC_RUNTIME]-description" = "When linking a target using Objective-C
