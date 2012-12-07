@@ -1,0 +1,5 @@
+
+To install it, copy the plugin in "/Library/Application Support/Developer/Shared/Xcode/Plug-ins/"
+
+Then, in your Xcode project, select "Clang Compiler Nightly Build" as compiler, and don't forget to set the clang binary path in the "Clang compiler path" build setting.
+
