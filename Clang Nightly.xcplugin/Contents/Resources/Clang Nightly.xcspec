@@ -256,13 +256,13 @@
                 CommandLineArgs = {
                   "disabled" = ();
                   // vptr support is broken on OS X as it generate ref to non exported libc++abi symbols.
-                  "undefined" = ( "-fsanitizer=undefined -fno-sanitize=vptr" );
-                  "<<otherwise>>" = ( "-fsanitizer=$(value)" );
+                  "undefined" = ( "-fsanitize=undefined", "-fno-sanitize=vptr" );
+                  "<<otherwise>>" = ( "-fsanitize=$(value)" );
                 };
                 // Required to tell the linker what runtime lib is required
                 AdditionalLinkerArgs = {
                   "disabled" = ();
-                  "<<otherwise>>" = ( "-fsanitizer=$(value)" );
+                  "<<otherwise>>" = ( "-fsanitize=$(value)" );
                 };
                 Category = CodeGeneration;
             },
@@ -1531,7 +1531,7 @@
                 );
                 Category = CodeGeneration;
                 Description = "Enables the use of extended vector instructions.  Only used when targeting Intel architectures. [CLANG_X86_VECTOR_INSTRUCTIONS]";
-            },            
+            },
             {
                 Name = "GCC_SYMBOLS_PRIVATE_EXTERN";
                 Type = Boolean;
@@ -2194,9 +2194,9 @@
     },
 
     {
-               Identifier = "com.apple.compilers.llvm.clang.1_0.migrator";
+               Identifier = "com.apple.compilers.llvm.clang.nightly.migrator";
                Type = Compiler;
-               BasedOn = "com.apple.compilers.llvm.clang.1_0";
+               BasedOn = "com.apple.compilers.llvm.clang.nightly";
                Name = "ObjC Migrator";
                Description = "Apple Clang ObjC Migrator 3.0";
                Architectures = (
@@ -2229,9 +2229,9 @@
       },
 
     {
-        Identifier = "com.apple.compilers.llvm.clang.1_0.astbuilder";
+        Identifier = "com.apple.compilers.llvm.clang.nightly.astbuilder";
         Type = Compiler;
-        BasedOn = "com.apple.compilers.llvm.clang.1_0";
+        BasedOn = "com.apple.compilers.llvm.clang.nightly";
         Name = "AST Builder";
         Description = "Apple Clang AST Builder 1.0";
         FileTypes = (
