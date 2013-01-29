@@ -819,6 +819,20 @@
                 Category = Warnings;
             },
             {
+                Name = "CLANG_WARN_DOCUMENTATION";
+                Type = Boolean;
+                DefaultValue = NO;
+                CommandLineArgs = {
+                    YES = (
+                        "-Wdocumentation",
+                    );
+                    NO = (
+                        "-Wno-documentation",
+                    );
+                };
+                Category = Warnings;
+            },
+            {
                 Name = "GCC_WARN_CHECK_SWITCH_STATEMENTS";
                 Type = Boolean;
                 DefaultValue = YES;

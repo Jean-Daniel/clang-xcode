@@ -364,6 +364,11 @@ will fail to compile. This setting only applies to C++ and Objective-C++ sources
 "[GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED]-value-[NO]" = "No";
 "[GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED]-value-[YES]" = "Yes";
 
+"[CLANG_WARN_DOCUMENTATION]-name" = "Check documentation syntax";
+"[CLANG_WARN_DOCUMENTATION]-description" = "Check that the documentation syntax conform to de-facto doxygen standard.  [CLANG_WARN_DOCUMENTATION, -Wdocumentation]";
+"[CLANG_WARN_DOCUMENTATION]-value-[NO]" = "No";
+"[CLANG_WARN_DOCUMENTATION]-value-[YES]" = "Yes";
+
 "[GCC_WARN_MISSING_PARENTHESES]-name" = "Missing Braces and Parentheses";
 "[GCC_WARN_MISSING_PARENTHESES]-description" = "Warn if parentheses are omitted in certain contexts, such as when there is an assignment in a context where a truth value is expected, or when operators are nested whose precedence people often get confused about.
 
