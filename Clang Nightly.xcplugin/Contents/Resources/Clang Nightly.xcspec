@@ -12,7 +12,7 @@
         Name = "Clang Nightly";
         Description = "Clang Nightly Build";
         Vendor = Apple;
-        Version = "3.0";
+        Version = "3.3";
         IsAbstract = NO;
         ShowInCompilerSelectionPopup = YES;
         FileTypes = (
@@ -125,6 +125,8 @@
                     gnu89,
                     c99,
                     gnu99,
+                    c11,
+                    gnu11,
                     "compiler-default",
                 );
                 DefaultValue = "compiler-default";
@@ -963,10 +965,53 @@
                     "-Wconversion",
                   );
                   NO = (
-		    "-Wno-conversion",
+                    /* This cannot be removed until we have a solution
+                       for <rdar://problem/11067768> */
+                   "-Wno-conversion",
                   );
                 };
                 CommonOption = NO;
+                Category = Warnings;
+            },
+            /* This must appear after CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION */
+            {
+                Name = "CLANG_WARN_CONSTANT_CONVERSION";
+                Type = Boolean;
+                DefaultValue = "$(CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION)";
+                CommandLineArgs = {
+                  YES = ( "-Wconstant-conversion" );
+                  NO  = ( "-Wno-constant-conversion" );
+                };
+                Category = Warnings;
+            },
+            /* This must appear after CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION */
+            {
+                Name = "CLANG_WARN_INT_CONVERSION";
+                Type = Boolean;
+                DefaultValue = "$(CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION)";
+                CommandLineArgs = {
+                  YES = (
+                    "-Wint-conversion"
+                  );
+                  NO  = (
+                    "-Wno-int-conversion"
+                  );
+                };
+                Category = Warnings;
+            },
+            /* This must appear after CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION */
+            {
+                Name = "CLANG_WARN_ENUM_CONVERSION";
+                Type = Boolean;
+                DefaultValue = "$(CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION)";
+                CommandLineArgs = {
+                  YES = (
+                    "-Wenum-conversion"
+                  );
+                  NO  = (
+                    "-Wno-enum-conversion"
+                  );
+                };
                 Category = Warnings;
             },
             {
@@ -977,8 +1022,7 @@
                     YES = (
                         "-Wsign-compare",
                     );
-                    NO = (
-                    );
+                    NO = ();
                 };
                 Category = Warnings;
             },
@@ -1050,19 +1094,6 @@
                 };
                 FileTypes = (
                   "sourcecode.c.objc",
-                  "sourcecode.cpp.objcpp",
-                );
-                Category = WarningsObjC;
-            },
-            {
-                Name = "CLANG_WARN_OBJCPP_ARC_ABI";
-                Type = Boolean;
-                DefaultValue = NO;
-                CommandLineArgs = {
-                  YES = ( "-Warc-abi" );
-                  NO = ( "-Wno-arc-abi" );
-                };
-                FileTypes = (
                   "sourcecode.cpp.objcpp",
                 );
                 Category = WarningsObjC;
@@ -1313,12 +1344,10 @@
             {
                 Name = "GCC_STRICT_ALIASING";
                 Type = Boolean;
-                DefaultValue = NO;
+                DefaultValue = YES;
                 CommandLineArgs = {
-                    YES = (
-                        "-fstrict-aliasing",
-                    );
-                    NO = ();
+                    YES = ( "-fstrict-aliasing" );
+                    NO  = ( "-fno-strict-aliasing" );
                 };
                 Category = CodeGeneration;
             },
@@ -1533,6 +1562,20 @@
                 Description = "Enables the use of extended vector instructions.  Only used when targeting Intel architectures. [CLANG_X86_VECTOR_INSTRUCTIONS]";
             },
             {
+                Name = "CLANG_LOOP_VECTORIZATION";
+                Type = Boolean;
+                DefaultValue = NO;
+                CommandLineArgs = {
+                    YES = (
+                        "-mllvm", "-vectorize-loops",
+                    );
+                    NO = ();
+                };
+                Category = CodeGeneration;
+                DisplayName = "Loop Vectorization";
+                Description = "Performs automatic loop vectorization whenever it is appropriate. This setting only takes effect when targetting a processor that supports auto-vectorization; if the processor targetted doesn't support vector operations, this setting has no effect. For more information see <http://blog.llvm.org/2012/12/new-loop-vectorizer.html>. [CLANG_LOOP_VECTORIZATION, -mllvm -vectorize-loops]";
+            },
+            {
                 Name = "GCC_SYMBOLS_PRIVATE_EXTERN";
                 Type = Boolean;
                 DefaultValue = NO;
@@ -1624,7 +1667,11 @@
                 CommonOption = NO;
                 DisplayName = "Missing Newline At End Of File";
                 Description = "Warn when a source file does not end with a newline.  [GCC_WARN_ABOUT_MISSING_NEWLINE, -Wnewline-eof]";
-            }, 
+            },
+            /*  NOTE: This must appear *after* CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION
+                as -Wsign-conversion is a subgroup of -Wconversion, and users
+                expect to be able to activate one build setting and disable the other
+                and get the expected result. */
             {
                 Name = "CLANG_WARN_IMPLICIT_SIGN_CONVERSION";
                 Type = Boolean;
@@ -1694,55 +1741,6 @@
                 );
                 // Category is hidden -- used by iPhoneSimulator to match runtime OS setup;
             },
-            {
-                Name = "CLANG_IBOUTLET";
-                Type = Boolean;
-                DefaultValue = YES;
-                CommandLineArgs = {
-                    YES = (
-                        "-DIBOutlet=__attribute__((iboutlet))",
-                    );
-                    NO = ();
-                };
-                FileTypes = (
-                    sourcecode.c.objc,
-                    sourcecode.cpp.objcpp,
-                );
-                // Category is hidden.
-            },
-            {
-                Name = "CLANG_IBOUTLETCOLLECTION";
-                Type = Boolean;
-                DefaultValue = YES;
-                CommandLineArgs = {
-                    YES = (
-                        "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))",
-                    );
-                    NO = ();
-                };
-                FileTypes = (
-                    sourcecode.c.objc,
-                    sourcecode.cpp.objcpp,
-                );
-                // Category is hidden.
-            },
-            {
-                Name = "CLANG_IBACTION";
-                Type = Boolean;
-                DefaultValue = YES;
-                CommandLineArgs = {
-                    YES = (
-                        "-DIBAction=void)__attribute__((ibaction)",
-                    );
-                    NO = ();
-                };
-                FileTypes = (
-                    sourcecode.c.objc,
-                    sourcecode.cpp.objcpp,
-                );
-                // Category is hidden.
-            },
-
             // These 4 settings are used by Xcode's migration tool.
             // They should not be removed.
             // They do not show up in the user visible build settings.
@@ -1836,7 +1834,8 @@
         // This is a workaround so that the analyzer ALWAYS uses the clang in the default toolchain.
         ExecPath = "$(CLANG_ANALYZER_EXEC)";
         RuleName = "Analyze $(InputFile)";
-        OutputDir = "$(CLANG_ANALYZER_OUTPUT_DIR)";
+        // Note that before 'StaticAnalyzer' this is just an expansion of TEMP_DIR.
+        OutputDir = "$(CLANG_ANALYZER_OUTPUT_DIR)/$(PROJECT_NAME).build/$(CONFIGURATION)/$(TARGET_NAME).build/StaticAnalyzer/$(CURRENT_VARIANT)/$(CURRENT_ARCH)";
         OutputFileExtension = plist;
         OutputsAreProducts = YES;
         IsAbstract = YES;
@@ -1868,7 +1867,7 @@
             {
                 Name = CLANG_ANALYZER_OUTPUT_DIR;
                 Type = Path;
-                DefaultValue = "$(TEMP_DIR)/StaticAnalyzer/$(CURRENT_VARIANT)/$(CURRENT_ARCH)";
+                DefaultValue = "$(OBJROOT)";
             },
             {
                 Name = "CLANG_ANALYZER_OUTPUT";
@@ -2044,7 +2043,7 @@
                CommandLineArgs = {
                   YES = ();
                   NO = ( "-Xclang", "-analyzer-disable-checker",
-                         "-Xclang", "macosx.SecKeychainAPI" );
+                         "-Xclang", "osx.SecKeychainAPI" );
                };
                FileTypes = (
                   "sourcecode.c.objc",
@@ -2198,7 +2197,7 @@
                Type = Compiler;
                BasedOn = "com.apple.compilers.llvm.clang.nightly";
                Name = "ObjC Migrator";
-               Description = "Apple Clang ObjC Migrator 3.0";
+               Description = "Apple Clang ObjC Migrator";
                Architectures = (
                        i386,
                        "x86_64",

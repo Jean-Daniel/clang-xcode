@@ -1,4 +1,4 @@
-﻿//
+//
 // Clang Nightly
 // Xcode Compiler Specification
 // English localization
@@ -10,7 +10,7 @@
 
 "Name" = "Clang Nightly";
 "Description" = "Clang Compiler Nightly Build";
-"Version" = "3.2";
+"Version" = "3.3";
 "Vendor" = "Apple";
 
 // Localized strings for compiler options
@@ -53,15 +53,19 @@ Incompatible GNU extensions include the 'asm', 'inline', and 'typeof' keywords (
 
 This setting also enables trigraphs.
 
-C89: Accept ISO C90, but not GNU extensions. [-std=c89]
+C89: Accept ISO C90 (1990), but not GNU extensions. [-std=c89]
 
 GNU89: Accept ISO C90 and GNU extensions. [-std=gnu89]
 
-C99: Accept ISO C99, but not GNU extensions. [-std=c99]
+C99: Accept ISO C99 (1999), but not GNU extensions. [-std=c99]
 
 GNU99: Accept ISO C99 and GNU extensions. [-std=gnu99]
 
-Compiler Default: Tells the compiler to use its default C language dialect. This is normally the best choice unless you have specific needs. (Currently equivalent to GNU89.)
+C11: Accept ISO C11 (2011), but not GNU extensions. [-std=c11]
+
+GNU11: Accept ISO C11 and GNU extensions. [-std=gnu11]
+
+Compiler Default: Tells the compiler to use its default C language dialect. This is normally the best choice unless you have specific needs. (Currently equivalent to GNU99.)
 
 Please see the full GCC manual for the full definition of all these settings on the C dialect:
 <http://developer.apple.com/documentation/DeveloperTools/gcc-4.2.1/gcc/C-Dialect-Options.html>
@@ -333,12 +337,12 @@ will fail to compile. This setting only applies to C++ and Objective-C++ sources
 "[CLANG_WARN__EXIT_TIME_DESTRUCTORS]-value-[NO]" = "No";
 "[CLANG_WARN__EXIT_TIME_DESTRUCTORS]-value-[YES]" = "Yes";
 
-"[CLANG_WARN__ARC_BRIDGE_CAST_NONARC]-name" = "Using __bridge casts outside of ARC";
+"[CLANG_WARN__ARC_BRIDGE_CAST_NONARC]-name" = "Using __bridge Casts Outside of ARC";
 "[CLANG_WARN__ARC_BRIDGE_CAST_NONARC]-description" = "Warn about using __bridge casts when not using ARC (where they have no effect).";
 "[CLANG_WARN__ARC_BRIDGE_CAST_NONARC]-value-[NO]" = "No";
 "[CLANG_WARN__ARC_BRIDGE_CAST_NONARC]-value-[YES]" = "Yes";
 
-"[CLANG_WARN__DUPLICATE_METHOD_MATCH]-name" = "Duplicate method definitions";
+"[CLANG_WARN__DUPLICATE_METHOD_MATCH]-name" = "Duplicate Method Definitions";
 "[CLANG_WARN__DUPLICATE_METHOD_MATCH]-description" = "Warn about declaring the same method more than once within the same @interface.";
 "[CLANG_WARN__DUPLICATE_METHOD_MATCH]-value-[NO]" = "No";
 "[CLANG_WARN__DUPLICATE_METHOD_MATCH]-value-[YES]" = "Yes";
@@ -630,6 +634,15 @@ where a target may wish to opt out of this behavior.";
 "[CLANG_X86_VECTOR_INSTRUCTIONS]-value-[sse4.2]" = "SSE 4.2";
 "[CLANG_X86_VECTOR_INSTRUCTIONS]-value-[avx]" = "AVX";
 
+"[CLANG_LOOP_VECTORIZATION]-name" = "Loop Vectorization";
+"[CLANG_LOOP_VECTORIZATION]-description" = "Performs automatic loop vectorization whenever it is appropriate. This setting only takes effect when targetting a processor that supports auto-vectorization; if the processor targetted doesn't support vector operations, this setting has no effect.
+
+For more information see <http://blog.llvm.org/2012/12/new-loop-vectorizer.html>.
+
+[CLANG_LOOP_VECTORIZATION, -mllvm -vectorize-loops]";
+"[CLANG_LOOP_VECTORIZATION]-value-[NO]" = "No";
+"[CLANG_LOOP_VECTORIZATION]-value-[YES]" = "Yes";
+
 "[GCC_SYMBOLS_PRIVATE_EXTERN]-name" = "Symbols Hidden by Default";
 "[GCC_SYMBOLS_PRIVATE_EXTERN]-description" = "When enabled, all symbols are declared 'private extern' unless explicitly marked to be exported using '__attribute__((visibility(\"default\")))' in code. If not enabled, all symbols are exported unless explicitly marked as 'private extern'.
 
@@ -663,6 +676,21 @@ For more information, see <http://developer.apple.com/documentation/DeveloperToo
 "[CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION]-description" = "Warn about various implicit conversions that can lose information or are otherwise suspicious.  [CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION, -Wconversion]";
 "[CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION]-value-[NO]" = "No";
 "[CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION]-value-[YES]" = "Yes";
+
+"[CLANG_WARN_CONSTANT_CONVERSION]-name" = "Implicit Constant Conversions";
+"[CLANG_WARN_CONSTANT_CONVERSION]-description" = "Warn about implicit conversions of constant values that cause the constant value to change, either through a loss of precision, or entirely in its meaning.  [CLANG_WARN_CONSTANT_CONVERSION, -Wconstant-conversion]";
+"[CLANG_WARN_CONSTANT_CONVERSION]-value-[NO]" = "No";
+"[CLANG_WARN_CONSTANT_CONVERSION]-value-[YES]" = "Yes";
+
+"[CLANG_WARN_INT_CONVERSION]-name" = "Implicit Integer to Pointer Conversions";
+"[CLANG_WARN_INT_CONVERSION]-description" = "Warn about implicit conversions between pointers and integers.  For example, this can catch issues when one incorrectly intermixes using NSNumber*'s and raw integers.  [CLANG_WARN_INT_CONVERSION, -Wint-conversion]";
+"[CLANG_WARN_INT_CONVERSION]-value-[NO]" = "No";
+"[CLANG_WARN_INT_CONVERSION]-value-[YES]" = "Yes";
+
+"[CLANG_WARN_ENUM_CONVERSION]-name" = "Implicit Enum Conversions";
+"[CLANG_WARN_ENUM_CONVERSION]-description" = "Warn about implicit conversions between different kinds of enum values.  For example, this can catch issues when using the wrong enum flag as an argument to a function or method.  [CLANG_WARN_ENUM_CONVERSION, -Wenum-conversion]";
+"[CLANG_WARN_ENUM_CONVERSION]-value-[NO]" = "No";
+"[CLANG_WARN_ENUM_CONVERSION]-value-[YES]" = "Yes";
 
 "[CLANG_WARN_IMPLICIT_SIGN_CONVERSION]-name" = "Implicit Signedness Conversions";
 "[CLANG_WARN_IMPLICIT_SIGN_CONVERSION]-description" = "Warn about implicit integer conversions that change the signedness of an integer value.  [CLANG_WARN_IMPLICIT_SIGN_CONVERSION, -Wsign-conversion]";
