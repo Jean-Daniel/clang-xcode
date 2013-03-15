@@ -639,15 +639,6 @@ where a target may wish to opt out of this behavior.";
 "[CLANG_X86_VECTOR_INSTRUCTIONS]-value-[sse4.2]" = "SSE 4.2";
 "[CLANG_X86_VECTOR_INSTRUCTIONS]-value-[avx]" = "AVX";
 
-"[CLANG_LOOP_VECTORIZATION]-name" = "Loop Vectorization";
-"[CLANG_LOOP_VECTORIZATION]-description" = "Performs automatic loop vectorization whenever it is appropriate. This setting only takes effect when targetting a processor that supports auto-vectorization; if the processor targetted doesn't support vector operations, this setting has no effect.
-
-For more information see <http://blog.llvm.org/2012/12/new-loop-vectorizer.html>.
-
-[CLANG_LOOP_VECTORIZATION, -mllvm -vectorize-loops]";
-"[CLANG_LOOP_VECTORIZATION]-value-[NO]" = "No";
-"[CLANG_LOOP_VECTORIZATION]-value-[YES]" = "Yes";
-
 "[GCC_SYMBOLS_PRIVATE_EXTERN]-name" = "Symbols Hidden by Default";
 "[GCC_SYMBOLS_PRIVATE_EXTERN]-description" = "When enabled, all symbols are declared 'private extern' unless explicitly marked to be exported using '__attribute__((visibility(\"default\")))' in code. If not enabled, all symbols are exported unless explicitly marked as 'private extern'.
 

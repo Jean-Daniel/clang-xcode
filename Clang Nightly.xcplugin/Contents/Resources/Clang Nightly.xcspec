@@ -160,10 +160,7 @@
                     "compiler-default" = ();
                     /* We need these two entries that reference c++0x to
                        maintain compatibility of old build settings. */
-                    "c++0x" = (
-                        "-std=c++11",
-                        "-U__STRICT_ANSI__",
-                    );
+                    "c++0x" = ( "-std=c++11" );
                     "gnu++0x" = ( "-std=gnu++11" );
                     /* Default for everything else. */
                     "<<otherwise>>" = (
@@ -1576,20 +1573,6 @@
                 Description = "Enables the use of extended vector instructions.  Only used when targeting Intel architectures. [CLANG_X86_VECTOR_INSTRUCTIONS]";
             },
             {
-                Name = "CLANG_LOOP_VECTORIZATION";
-                Type = Boolean;
-                DefaultValue = NO;
-                CommandLineArgs = {
-                    YES = (
-                        "-mllvm", "-vectorize-loops",
-                    );
-                    NO = ();
-                };
-                Category = CodeGeneration;
-                DisplayName = "Loop Vectorization";
-                Description = "Performs automatic loop vectorization whenever it is appropriate. This setting only takes effect when targetting a processor that supports auto-vectorization; if the processor targetted doesn't support vector operations, this setting has no effect. For more information see <http://blog.llvm.org/2012/12/new-loop-vectorizer.html>. [CLANG_LOOP_VECTORIZATION, -mllvm -vectorize-loops]";
-            },
-            {
                 Name = "GCC_SYMBOLS_PRIVATE_EXTERN";
                 Type = Boolean;
                 DefaultValue = NO;
@@ -1848,8 +1831,7 @@
         // This is a workaround so that the analyzer ALWAYS uses the clang in the default toolchain.
         ExecPath = "$(CLANG_ANALYZER_EXEC)";
         RuleName = "Analyze $(InputFile)";
-        // Note that before 'StaticAnalyzer' this is just an expansion of TEMP_DIR.
-        OutputDir = "$(CLANG_ANALYZER_OUTPUT_DIR)/$(PROJECT_NAME).build/$(CONFIGURATION)/$(TARGET_NAME).build/StaticAnalyzer/$(CURRENT_VARIANT)/$(CURRENT_ARCH)";
+        OutputDir = "$(CLANG_ANALYZER_OUTPUT_DIR)/StaticAnalyzer/$(PROJECT_NAME)/$(TARGET_NAME)/$(CURRENT_VARIANT)/$(CURRENT_ARCH)";
         OutputFileExtension = plist;
         OutputsAreProducts = YES;
         IsAbstract = YES;
@@ -1881,7 +1863,7 @@
             {
                 Name = CLANG_ANALYZER_OUTPUT_DIR;
                 Type = Path;
-                DefaultValue = "$(OBJROOT)";
+                DefaultValue = "$(TEMP_DIR)";
             },
             {
                 Name = "CLANG_ANALYZER_OUTPUT";
