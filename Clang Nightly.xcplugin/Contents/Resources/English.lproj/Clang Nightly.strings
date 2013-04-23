@@ -96,6 +96,10 @@ C++11: Accept the ISO C++ 2011 standard with amendments, but not GNU extensions.
 
 GNU++11: Accept the ISO C++ 2011 standard with amendments and GNU extensions. [-std=gnu++11]
 
+C++1Y: Accept the ISO C++ 201Y standard with amendments, but not GNU extensions. [-std=c++1y]
+
+GNU++1Y: Accept the ISO C++ 201Y standard with amendments and GNU extensions. [-std=gnu++1y]
+
 Compiler Default: Tells the compiler to use its default C++ language dialect. This is normally the best choice unless you have specific needs. (Currently equivalent to GNU++98.)
 
 [CLANG_CXX_LANGUAGE_STANDARD]
@@ -113,6 +117,10 @@ Compiler Default: Tells the compiler to use its default C++ language dialect. Th
 "[CLANG_CXX_LANGUAGE_STANDARD]-value-[gnu++0x]" = "GNU++11 [-std=gnu++11]";
 /* Note that the value must remain gnu++0x, for backwards compatibility. */
 "[CLANG_CXX_LANGUAGE_STANDARD]-description-[gnu++0x]" = "Accept the ISO C++ 2011 standard with amendments and GNU extensions. [-std=gnu++11]";
+"[CLANG_CXX_LANGUAGE_STANDARD]-value-[c++1y]" = "C++1y [-std=c++1y]";
+"[CLANG_CXX_LANGUAGE_STANDARD]-description-[c++1y]" = "Accept ISO C++ 201y with amendments, but not GNU extensions. [-std=c++1y]";
+"[CLANG_CXX_LANGUAGE_STANDARD]-value-[gnu++1y]" = "GNU++1y [-std=gnu++1y]";
+"[CLANG_CXX_LANGUAGE_STANDARD]-description-[gnu++1y]" = "Accept ISO C++ 201y with amendments and GNU extensions. [-std=gnu++1y]";
 "[CLANG_CXX_LANGUAGE_STANDARD]-value-[compiler-default]" = "Compiler Default";
 "[CLANG_CXX_LANGUAGE_STANDARD]-description-[compiler-default]" = "Tells the compiler to use its default C++ language dialect. This is normally the best choice unless you have specific needs. (Currently equivalent to GNUC++98.)";
 

@@ -153,6 +153,8 @@
                     "gnu++98",
                     "c++0x",
                     "gnu++0x",
+                    "c++1y",
+                    "gnu++1y",
                     "compiler-default",
                 );
                 DefaultValue = "compiler-default";
