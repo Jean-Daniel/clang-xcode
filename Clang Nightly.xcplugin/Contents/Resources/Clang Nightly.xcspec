@@ -504,6 +504,46 @@
                 Category = CodeGeneration;
             },
             {
+                Name = "CLANG_ENABLE_VECTORIZER";
+                Type = Enumeration;
+                AllowedValues = (
+                    "compiler-default",
+                    YES,
+                    NO,
+                );
+                DefaultValue = "compiler-default";
+                CommandLineArgs = {
+                    "compiler-default" = ();
+                    YES = (
+                        "-fvectorize",
+                    );
+                    NO = (
+                        "-fno-vectorize",
+                    );
+                };
+                Category = CodeGeneration;
+            },
+            {
+                Name = "CLANG_ENABLE_SLP_VECTORIZER";
+                Type = Enumeration;
+                AllowedValues = (
+                    NO,
+                    YES,
+                    AGGRESSIVE,
+                );
+                DefaultValue = NO;
+                CommandLineArgs = {
+                    NO = ();
+                    YES = (
+                        "-fslp-vectorize",
+                    );
+                    AGGRESSIVE = (
+                        "-fslp-vectorize-aggressive",
+                    );
+                };
+                Category = CodeGeneration;
+            },
+            {
                 Name = "LLVM_LTO";
                 Type = Boolean;
                 DefaultValue = NO;

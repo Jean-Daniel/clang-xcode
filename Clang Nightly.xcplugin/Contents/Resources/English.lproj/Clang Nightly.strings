@@ -518,6 +518,34 @@ Fastest, smallest: Optimize for size.  This setting enables all 'Faster' optimiz
 "[GCC_OPTIMIZATION_LEVEL]-value-[3]" = "Fastest [-O3]";
 "[GCC_OPTIMIZATION_LEVEL]-value-[s]" = "Fastest, Smallest [-Os]";
 
+"[CLANG_ENABLE_VECTORIZER]-name" = "Enable Loop Vectorizer";
+"[CLANG_ENABLE_VECTORIZER]-description" = "Compiler Default: Enable if optimization level is -O3.
+
+Yes: Enable loop vectorizer. [-fvectorize]
+
+No: Disable loop vectorizer. [-fno-vectorize]
+
+See http://blog.llvm.org/2013/05/llvm-33-vectorization-improvements.html
+
+[CLANG_ENABLE_VECTORIZER]";
+"[CLANG_ENABLE_VECTORIZER]-value-[NO]" = "No";
+"[CLANG_ENABLE_VECTORIZER]-value-[YES]" = "Yes";
+"[CLANG_ENABLE_VECTORIZER]-value-[compiler-default]" = "Compiler Default";
+
+"[CLANG_ENABLE_SLP_VECTORIZER]-name" = "Enable SLP Vectorizer";
+"[CLANG_ENABLE_SLP_VECTORIZER]-description" = "No: Disable loop vectorizer. [-fno-vectorize]
+
+Yes: Enable loop vectorizer. [-fvectorize]
+
+Aggressive: Enable with additional compile-time intensive optimization. [-fslp-vectorize-aggressive]
+
+See http://blog.llvm.org/2013/05/llvm-33-vectorization-improvements.html
+
+[CLANG_ENABLE_SLP_VECTORIZER]";
+"[CLANG_ENABLE_SLP_VECTORIZER]-value-[NO]" = "No";
+"[CLANG_ENABLE_SLP_VECTORIZER]-value-[YES]" = "Yes";
+"[CLANG_ENABLE_SLP_VECTORIZER]-value-[AGGRESSIVE]" = "Aggressive";
+
 "[LLVM_LTO]-name" = "Link-Time Optimization";
 "[LLVM_LTO]-description" = "Enabling this setting allows the optimizer to look across object files in your program and optimize across file boundaries during linking.  [LLVM_LTO, -flto]";
 "[LLVM_LTO]-value-[NO]" = "No";
