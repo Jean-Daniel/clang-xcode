@@ -518,12 +518,12 @@ Fastest, smallest: Optimize for size.  This setting enables all 'Faster' optimiz
 "[GCC_OPTIMIZATION_LEVEL]-value-[3]" = "Fastest [-O3]";
 "[GCC_OPTIMIZATION_LEVEL]-value-[s]" = "Fastest, Smallest [-Os]";
 
-"[CLANG_ENABLE_VECTORIZER]-name" = "Enable Loop Vectorizer";
+"[CLANG_ENABLE_VECTORIZER]-name" = "Loop vectorization";
 "[CLANG_ENABLE_VECTORIZER]-description" = "Compiler Default: Enable if optimization level is -O3.
 
-Yes: Enable loop vectorizer. [-fvectorize]
+Yes: Enable the loop vectorization passes. [-fvectorize]
 
-No: Disable loop vectorizer. [-fno-vectorize]
+No: Disable the loop vectorization passes. [-fno-vectorize]
 
 See http://blog.llvm.org/2013/05/llvm-33-vectorization-improvements.html
 
@@ -532,12 +532,12 @@ See http://blog.llvm.org/2013/05/llvm-33-vectorization-improvements.html
 "[CLANG_ENABLE_VECTORIZER]-value-[YES]" = "Yes";
 "[CLANG_ENABLE_VECTORIZER]-value-[compiler-default]" = "Compiler Default";
 
-"[CLANG_ENABLE_SLP_VECTORIZER]-name" = "Enable SLP Vectorizer";
-"[CLANG_ENABLE_SLP_VECTORIZER]-description" = "No: Disable loop vectorizer. [-fno-vectorize]
+"[CLANG_ENABLE_SLP_VECTORIZER]-name" = "Superword-Level Parallelism Vectorization";
+"[CLANG_ENABLE_SLP_VECTORIZER]-description" = "No: Disable the superword-level parallelism vectorization passes. []
 
-Yes: Enable loop vectorizer. [-fvectorize]
+Yes: Enable the superword-level parallelism vectorization passes. [-fslp-vectorize]
 
-Aggressive: Enable with additional compile-time intensive optimization. [-fslp-vectorize-aggressive]
+Aggressive: Additionaly enable the BB vectorization passes which is a compile-time intensive optimization. [-fslp-vectorize-aggressive]
 
 See http://blog.llvm.org/2013/05/llvm-33-vectorization-improvements.html
 
