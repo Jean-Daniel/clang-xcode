@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BuildMachineOSBuild</key>
+	<string>13A464</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleIdentifier</key>
@@ -13,11 +15,25 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>6.4</string>
+	<string>7.0</string>
 	<key>CFBundleSignature</key>
 	<string>clng</string>
 	<key>CFBundleVersion</key>
-	<string>1480</string>
+	<string>3504.8</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string></string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>13A464</string>
+	<key>DTSDKName</key>
+	<string>macosx10.9internal</string>
+	<key>DTXcode</key>
+	<string>0500</string>
+	<key>DTXcodeBuild</key>
+	<string></string>
 	<key>XC4Compatible</key>
 	<true/>
 	<key>XCGCReady</key>

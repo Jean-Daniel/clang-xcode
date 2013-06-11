@@ -1,0 +1,16 @@
+//
+//  Default compiler specification
+//  English localization
+//
+//  Copyright (c) 2008-2012 Apple Inc.  All rights reserved.
+//
+
+// Localized strings for basic info
+"Name" = "Default Compiler";
+"Description" = "Default Compiler";
+"Version" = "Default";
+"Vendor" = "Apple";
+
+// Localized strings for output-parse-info
+"OutputParseInfo-ProgressStatusFormat" = "Compiling %@";    // arg 1 is name of rule's input file
+"OutputParseInfo-MessageStatusFormat" = "Compile %@";       // arg 1 is name of rule's input file, arg 2 is name of file containing message (@"" if unknown)

@@ -3,14 +3,14 @@
 // Xcode Compiler Specification
 // English localization
 //
-// Copyright (c) 2009-2012 Apple Inc.  All rights reserved.
+// Copyright (c) 2009-2013 Apple Inc.  All rights reserved.
 //
 
 // Localized strings for basic info
 
 "Name" = "Clang Nightly";
 "Description" = "Clang Compiler Nightly Build";
-"Version" = "3.3";
+"Version" = "3.4";
 "Vendor" = "Apple";
 
 // Localized strings for compiler options
@@ -28,8 +28,13 @@
 "[GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS]-name" = "Preprocessor Macros Not Used In Precompiled Headers";
 "[GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS]-description" = "Space-separated list of preprocessor macros of the form \"foo\" or \"foo=bar\". These macros are not used when precompiling a prefix header file. [GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS, -D]";
 
+"[ENABLE_NS_ASSERTIONS]-name" = "Enable Foundation Assertions";
+"[ENABLE_NS_ASSERTIONS]-description" = "Controls whether assertion logic provided by NSAssert is included in the preprocessed source code our is elided during preprocessing.  Disabling assertions can improve code performance.  [ENABLE_NS_ASSERTIONS]";
+"[ENABLE_NS_ASSERTIONS]-value-[NO]" = "No";
+"[ENABLE_NS_ASSERTIONS]-value-[YES]" = "Yes";
 
 "[Language]-category" = "Language";
+"[LanguageModules]-category" = "Language - Modules";
 
 "[GCC_INPUT_FILETYPE]-name" = "Compile Sources As";
 "[GCC_INPUT_FILETYPE]-description" = "Specifies whether to compile each source file according to its file type, or whether to treat all source files in the target as if they are of a specific language. [GCC_INPUT_FILETYPE]";
@@ -249,9 +254,11 @@ Enabling increased sharing of PCH files carries some risk: If two targets use th
 "[OTHER_CPLUSPLUSFLAGS]-name" = "Other C++ Flags";
 "[OTHER_CPLUSPLUSFLAGS]-description" = "Space-separated list of additional flags to pass to the compiler for C++ and Objective-C++ files.  Be sure to backslash-escape any arguments that contain spaces or special characters (e.g. path names that may contain spaces).  Use this setting if Xcode does not already provide UI for a C++ or Objective-C++ compiler flag. [OTHER_CPLUSPLUSFLAGS]";
 
+"[CustomFlags]-category" = "Custom Compiler Flags";
 "[Warnings]-category" = "Warnings - All languages";
-"[WarningsPolicy]-category" = "Warning Polices";
+"[WarningsPolicy]-category" = "Warning Policies";
 "[WarningsObjC]-category" = "Warnings - Objective C";
+"[WarningsObjCARC]-category" = "Warnings - Objective C and ARC";
 "[WarningsCXX]-category" = "Warnings - C++";
 
 "[GCC_TREAT_WARNINGS_AS_ERRORS]-name" = "Treat Warnings as Errors";
@@ -293,6 +300,18 @@ This option does not warn about designated initializers, so the following modifi
 "[GCC_WARN_ABOUT_RETURN_TYPE]-description" = "Causes warnings to be emitted when a function with a defined return type (not void) contains a return statement without a return-value.  Also emits a warning when a function is defined without specifying a return type.  [GCC_WARN_ABOUT_RETURN_TYPE, -Wreturn-type]";
 "[GCC_WARN_ABOUT_RETURN_TYPE]-value-[NO]" = "No";
 "[GCC_WARN_ABOUT_RETURN_TYPE]-value-[YES]" = "Yes";
+"[GCC_WARN_ABOUT_RETURN_TYPE]-value-[YES_ERROR]" = "Yes (treat as error)";
+
+"[CLANG_WARN_DIRECT_OBJC_ISA_USAGE]-name" = "Direct usage of 'isa'";
+"[CLANG_WARN_DIRECT_OBJC_ISA_USAGE]-description" = "Warn about direct accesses to the Objective-C 'isa' pointer instead of using a runtime API. [CLANG_WARN_DIRECT_OBJC_ISA_USAGE, -Wdeprecated-objc-isa-usage]";
+"[CLANG_WARN_DIRECT_OBJC_ISA_USAGE]-value-[NO]" = "No";
+"[CLANG_WARN_DIRECT_OBJC_ISA_USAGE]-value-[YES]" = "Yes";
+"[CLANG_WARN_DIRECT_OBJC_ISA_USAGE]-value-[YES_ERROR]" = "Yes (treat as error)";
+
+"[CLANG_WARN_DOCUMENTATION_COMMENTS]-name" = "Documentation Comments";
+"[CLANG_WARN_DOCUMENTATION_COMMENTS]-description" = "Warns about issues in documentation comments (doxygen-style) such as missing or incorrect documentation tags.  [CLANG_WARN_DOCUMENTATION_COMMENTS, -Wdocumentation]";
+"[CLANG_WARN_DOCUMENTATION_COMMENTS]-value-[NO]" = "No";
+"[CLANG_WARN_DOCUMENTATION_COMMENTS]-value-[YES]" = "Yes";
 
 "[CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES]-name" = "Implicit Atomic Objective-C Properties";
 "[CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES]-description" = "Warn about @property declarations that are implicitly atomic.";
@@ -305,11 +324,33 @@ explicitly synthesized using @synthesize.  This warning warns about such implici
 "[CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS]-value-[NO]" = "No";
 "[CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS]-value-[YES]" = "Yes";
 
+"[CLANG_WARN_OBJC_ROOT_CLASS]-name" = "Unintentional Root Class";
+"[CLANG_WARN_OBJC_ROOT_CLASS]-description" = "Warn about classes that unintentionally do not subclass a root class (such as NSObject).  [CLANG_WARN_OBJC_ROOT_CLASS, -Wobjc-root-class]";
+"[CLANG_WARN_OBJC_ROOT_CLASS]-value-[NO]" = "No";
+"[CLANG_WARN_OBJC_ROOT_CLASS]-value-[YES]" = "Yes";
+"[CLANG_WARN_OBJC_ROOT_CLASS]-value-[YES_ERROR]" = "Yes (treat as error)";
+
 "[CLANG_WARN_OBJC_RECEIVER_WEAK]-name" = "Sending messages to __weak pointers";
 "[CLANG_WARN_OBJC_RECEIVER_WEAK]-description" = "Warn about sending messages to Objective-C pointers that are __weak.  This aids in avoiding situations (e.g., race conditions) when the last strong reference goes away and a client
-is messaging a __weak pointer that can suddenly (and unexpectedly) become nil.";
+is messaging a __weak pointer that can suddenly (and unexpectedly) become nil.  [CLANG_WARN_OBJC_RECEIVER_WEAK, -Wreceiver-is-weak]";
 "[CLANG_WARN_OBJC_RECEIVER_WEAK]-value-[NO]" = "No";
 "[CLANG_WARN_OBJC_RECEIVER_WEAK]-value-[YES]" = "Yes";
+
+"[CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK]-name" = "Repeatedly using a __weak reference";
+"[CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK]-description" = "Warn about repeatedly using a weak reference without assigning the weak reference to a strong reference.  This is often symptomatic of a race condition where the weak reference can become nil between accesses, resulting in unexpected behavior.  Assigning to temporary strong reference ensures the object stays alive during the
+related accesses.  [CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK, -Warc-repeated-use-of-weak]";
+"[CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK]-value-[NO]" = "No";
+"[CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK]-value-[YES]" = "Yes";
+
+"[CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE]-name" = "Implicit ownership types on out parameters";
+"[CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE]-description" = "Warn about implicit ownership types on Objective-C object references as out parameters.  For example, declaring a parameter with type 'NSObject**' will produce a warning because the compiler will assume that the out parameter's ownership type is '__autoreleasing'.  CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE, -Wexplicit-ownership-type]";
+"[CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE]-value-[NO]" = "No";
+"[CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE]-value-[YES]" = "Yes";
+
+"[CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF]-name" = "Implicit retain of 'self' within blocks";
+"[CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF]-description" = "Warn about implicit retains of 'self' within blocks, which can create a retain-cycle.  CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF, -Wimplicit-retain-self]";
+"[CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF]-value-[NO]" = "No";
+"[CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF]-value-[YES]" = "Yes";
 
 "[GCC_WARN_NON_VIRTUAL_DESTRUCTOR]-name" = "Nonvirtual Destructor";
 "[GCC_WARN_NON_VIRTUAL_DESTRUCTOR]-description" = "Warn when a class declares an nonvirtual destructor that should probably be virtual, because it looks like the class will be used polymorphically.  [GCC_WARN_NON_VIRTUAL_DESTRUCTOR, -Wnon-virtual-dtor]
@@ -371,11 +412,6 @@ will fail to compile. This setting only applies to C++ and Objective-C++ sources
 [GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED, -Wmissing-braces]";
 "[GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED]-value-[NO]" = "No";
 "[GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED]-value-[YES]" = "Yes";
-
-"[CLANG_WARN_DOCUMENTATION]-name" = "Check documentation syntax";
-"[CLANG_WARN_DOCUMENTATION]-description" = "Check that the documentation syntax conform to de-facto doxygen standard.  [CLANG_WARN_DOCUMENTATION, -Wdocumentation]";
-"[CLANG_WARN_DOCUMENTATION]-value-[NO]" = "No";
-"[CLANG_WARN_DOCUMENTATION]-value-[YES]" = "Yes";
 
 "[GCC_WARN_MISSING_PARENTHESES]-name" = "Missing Braces and Parentheses";
 "[GCC_WARN_MISSING_PARENTHESES]-description" = "Warn if parentheses are omitted in certain contexts, such as when there is an assignment in a context where a truth value is expected, or when operators are nested whose precedence people often get confused about.
@@ -494,6 +530,11 @@ Also warn about constructions where there may be confusion to which if statement
 "[GCC_GENERATE_DEBUGGING_SYMBOLS]-value-[NO]" = "No";
 "[GCC_GENERATE_DEBUGGING_SYMBOLS]-value-[YES]" = "Yes";
 
+"[CLANG_DEBUG_INFORMATION_LEVEL]-name" = "Debug Information Level";
+"[CLANG_DEBUG_INFORMATION_LEVEL]-description" = "Toggles the amount of debug information emitted when debug symbols are enabled.  This can impact the size of the generated debug information, which can matter in some cases for large projects (such as when using LTO).  [CLANG_DEBUG_INFORMATION_LEVEL]";
+"[CLANG_DEBUG_INFORMATION_LEVEL]-value-[default]" = "Compiler default";
+"[CLANG_DEBUG_INFORMATION_LEVEL]-value-[line-tables-only]" = "Line tables only";
+
 "[GCC_OPTIMIZATION_LEVEL]-name" = "Optimization Level";
 "[GCC_OPTIMIZATION_LEVEL]-description" = "None: Do not optimize. [-O0]
 
@@ -509,31 +550,20 @@ With this setting, the compiler does not perform loop unrolling or function inli
 
 Fastest: Turns on all optimizations specified by the 'Faster' setting and also turns on function inlining and register renaming options. This setting may result in a larger binary. [-O3]
 
-Fastest, smallest: Optimize for size.  This setting enables all 'Faster' optimizations that do not typically increase code size.  It also performs further optimizations designed to reduce code size. [-Os]
+Fastest, Smallest: Optimize for size.  This setting enables all 'Faster' optimizations that do not typically increase code size.  It also performs further optimizations designed to reduce code size. [-Os]
+
+Fastest, Aggressive Optimizations: This setting enables 'Fastest' but also enables aggressive optimizations that may break strict standards compliance but should work well on well-behaved code.  [-Ofast]
 
 [GCC_OPTIMIZATION_LEVEL]";
 "[GCC_OPTIMIZATION_LEVEL]-value-[0]" = "None [-O0]";
 "[GCC_OPTIMIZATION_LEVEL]-value-[1]" = "Fast [-O, O1]";
 "[GCC_OPTIMIZATION_LEVEL]-value-[2]" = "Faster [-O2]";
 "[GCC_OPTIMIZATION_LEVEL]-value-[3]" = "Fastest [-O3]";
+"[GCC_OPTIMIZATION_LEVEL]-value-[fast]" = "Fastest, Aggressive Optimizations [-Ofast]";
 "[GCC_OPTIMIZATION_LEVEL]-value-[s]" = "Fastest, Smallest [-Os]";
 
-"[CLANG_ENABLE_VECTORIZER]-name" = "Loop vectorization";
-"[CLANG_ENABLE_VECTORIZER]-description" = "Compiler Default: Enable if optimization level is -O3.
-
-Yes: Enable the loop vectorization passes. [-fvectorize]
-
-No: Disable the loop vectorization passes. [-fno-vectorize]
-
-See http://blog.llvm.org/2013/05/llvm-33-vectorization-improvements.html
-
-[CLANG_ENABLE_VECTORIZER]";
-"[CLANG_ENABLE_VECTORIZER]-value-[NO]" = "No";
-"[CLANG_ENABLE_VECTORIZER]-value-[YES]" = "Yes";
-"[CLANG_ENABLE_VECTORIZER]-value-[compiler-default]" = "Compiler Default";
-
-"[CLANG_ENABLE_SLP_VECTORIZER]-name" = "Superword-Level Parallelism Vectorization";
-"[CLANG_ENABLE_SLP_VECTORIZER]-description" = "No: Disable the superword-level parallelism vectorization passes. []
+"[LLVM_SLP_VECTORIZER]-name" = "Superword-Level Parallelism Vectorization";
+"[LLVM_SLP_VECTORIZER]-description" = "No: Disable the superword-level parallelism vectorization passes. []
 
 Yes: Enable the superword-level parallelism vectorization passes. [-fslp-vectorize]
 
@@ -541,15 +571,20 @@ Aggressive: Additionaly enable the BB vectorization passes which is a compile-ti
 
 See http://blog.llvm.org/2013/05/llvm-33-vectorization-improvements.html
 
-[CLANG_ENABLE_SLP_VECTORIZER]";
-"[CLANG_ENABLE_SLP_VECTORIZER]-value-[NO]" = "No";
-"[CLANG_ENABLE_SLP_VECTORIZER]-value-[YES]" = "Yes";
-"[CLANG_ENABLE_SLP_VECTORIZER]-value-[AGGRESSIVE]" = "Aggressive";
+[LLVM_SLP_VECTORIZER]";
+"[LLVM_SLP_VECTORIZER]-value-[NO]" = "No";
+"[LLVM_SLP_VECTORIZER]-value-[YES]" = "Yes";
+"[LLVM_SLP_VECTORIZER]-value-[AGGRESSIVE]" = "Aggressive";
 
 "[LLVM_LTO]-name" = "Link-Time Optimization";
 "[LLVM_LTO]-description" = "Enabling this setting allows the optimizer to look across object files in your program and optimize across file boundaries during linking.  [LLVM_LTO, -flto]";
 "[LLVM_LTO]-value-[NO]" = "No";
 "[LLVM_LTO]-value-[YES]" = "Yes";
+
+"[LLVM_VECTORIZE_LOOPS]-name" = "Vectorize Loops";
+"[LLVM_VECTORIZE_LOOPS]-description" = "Enables the loop autovectorizer. When this option is enabled the compiler detects loops that may benefit from vectorization and compiles them to use the SIMD unit of the CPU. Autovectorization makes the code larger but may make it faster by reducing the number of iterations executed. This optimization is mainly profitable for loops with a high trip count.  [LLVM_VECTORIZE_LOOPS, -fvectorize]";
+"[LLVM_VECTORIZE_LOOPS]-value-[NO]" = "No";
+"[LLVM_VECTORIZE_LOOPS]-value-[YES]" = "Yes";
 
 "[GCC_NO_COMMON_BLOCKS]-name" = "No Common Blocks";
 "[GCC_NO_COMMON_BLOCKS]-description" = "In C, allocate even uninitialized global variables in the data section of the object file, rather than generating them as common blocks.  This has the effect that if the same variable is declared (without extern ) in two different compilations, you will get an error when you link them.  The only reason this might be useful is if you wish to verify that the program will work on other systems which always work this way.  [GCC_NO_COMMON_BLOCKS, -fno-common]";
@@ -581,8 +616,8 @@ See http://blog.llvm.org/2013/05/llvm-33-vectorization-improvements.html
 "[GCC_WARN_UNUSED_VALUE]-value-[NO]" = "No";
 "[GCC_WARN_UNUSED_VALUE]-value-[YES]" = "Yes";
 
-"[GCC_CW_ASM_SYNTAX]-name" = "CodeWarrior-Style Inline Assembly";
-"[GCC_CW_ASM_SYNTAX]-description" = "Enable the CodeWarrior syntax for inline assembly code in addition to the standard GCC syntax. [GCC_CW_ASM_SYNTAX, -fasm-blocks]";
+"[GCC_CW_ASM_SYNTAX]-name" = "CodeWarrior/MS-Style Inline Assembly";
+"[GCC_CW_ASM_SYNTAX]-description" = "Enable the CodeWarrior/Microsoft syntax for inline assembly code in addition to the standard GCC syntax. [GCC_CW_ASM_SYNTAX, -fasm-blocks]";
 "[GCC_CW_ASM_SYNTAX]-value-[NO]" = "No";
 "[GCC_CW_ASM_SYNTAX]-value-[YES]" = "Yes";
 
@@ -658,6 +693,16 @@ where a target may wish to opt out of this behavior.";
 "[CLANG_LINK_OBJC_RUNTIME]-value-[YES]" = "Yes";
 "[CLANG_LINK_OBJC_RUNTIME]-value-[No]" = "No";
 
+"[CLANG_ENABLE_MODULES]-name" = "Enable Modules (C and Objective-C)";
+"[CLANG_ENABLE_MODULES]-description" = "Enables the use of modules for system APIs.  System headers are imported as semantic modules instead of raw headers.  This can result in faster builds and project indexing.  [CLANG_ENABLE_MODULES, -fmodules]";
+"[CLANG_ENABLE_MODULES]-value-[YES]" = "Yes";
+"[CLANG_ENABLE_MODULES]-value-[NO]" = "No";
+
+"[CLANG_MODULES_AUTOLINK]-name" = "Link Frameworks Automatically";
+"[CLANG_MODULES_AUTOLINK]-description" = "Automatically link SDK frameworks that are referenced using a #import/#include.  This feature requires also enabling support for modules.  [CLANG_MODULES_AUTOLINK, -fmodules-autolink]";
+"[CLANG_MODULES_AUTOLINK]-value-[YES]" = "Yes (when modules are enabled)";
+"[CLANG_MODULES_AUTOLINK]-value-[NO]" = "No";
+
 "[GCC_ENABLE_EXCEPTIONS]-name" = "Enable Exceptions";
 "[GCC_ENABLE_EXCEPTIONS]-description" = "Enable exception handling.  Generates extra code needed to propagate exceptions.  For some targets, this implies GCC will generate frame unwind information for all functions, which can produce significant data size overhead, although it does not affect execution.  If you do not specify this option, GCC will enable it by default for languages like C++ and Objective-C which normally require exception handling, and disable it for languages like C that do not normally require it.  However, you may need to enable this option when compiling C code that needs to interoperate properly with exception handlers written in other languages.  You may also wish to disable this option if you are compiling older programs that don't use exception handling.  [GCC_ENABLE_EXCEPTIONS, -fexceptions]";
 "[GCC_ENABLE_EXCEPTIONS]-value-[NO]" = "No";
@@ -674,6 +719,7 @@ where a target may wish to opt out of this behavior.";
 "[CLANG_X86_VECTOR_INSTRUCTIONS]-value-[sse4.1]" = "SSE 4.1";
 "[CLANG_X86_VECTOR_INSTRUCTIONS]-value-[sse4.2]" = "SSE 4.2";
 "[CLANG_X86_VECTOR_INSTRUCTIONS]-value-[avx]" = "AVX";
+"[CLANG_X86_VECTOR_INSTRUCTIONS]-value-[avx2]" = "AVX 2";
 
 "[GCC_SYMBOLS_PRIVATE_EXTERN]-name" = "Symbols Hidden by Default";
 "[GCC_SYMBOLS_PRIVATE_EXTERN]-description" = "When enabled, all symbols are declared 'private extern' unless explicitly marked to be exported using '__attribute__((visibility(\"default\")))' in code. If not enabled, all symbols are exported unless explicitly marked as 'private extern'.
@@ -719,6 +765,11 @@ For more information, see <http://developer.apple.com/documentation/DeveloperToo
 "[CLANG_WARN_INT_CONVERSION]-value-[NO]" = "No";
 "[CLANG_WARN_INT_CONVERSION]-value-[YES]" = "Yes";
 
+"[CLANG_WARN_BOOL_CONVERSION]-name" = "Implicit Boolean Conversions";
+"[CLANG_WARN_BOOL_CONVERSION]-description" = "Warn about implicit conversions to boolean values that are suspicious.  For example, writing 'if (foo)' with 'foo' being the name a function will trigger a warning.  [CLANG_WARN_BOOL_CONVERSION, -Wbool-conversion]";
+"[CLANG_WARN_BOOL_CONVERSION]-value-[NO]" = "No";
+"[CLANG_WARN_BOOL_CONVERSION]-value-[YES]" = "Yes";
+
 "[CLANG_WARN_ENUM_CONVERSION]-name" = "Implicit Enum Conversions";
 "[CLANG_WARN_ENUM_CONVERSION]-description" = "Warn about implicit conversions between different kinds of enum values.  For example, this can catch issues when using the wrong enum flag as an argument to a function or method.  [CLANG_WARN_ENUM_CONVERSION, -Wenum-conversion]";
 "[CLANG_WARN_ENUM_CONVERSION]-value-[NO]" = "No";
@@ -735,56 +786,65 @@ of the warnings provided by -Wconversion.  [GCC_WARN_64_TO_32_BIT_CONVERSION, -W
 "[GCC_WARN_64_TO_32_BIT_CONVERSION]-value-[NO]" = "No";
 "[GCC_WARN_64_TO_32_BIT_CONVERSION]-value-[YES]" = "Yes";
 
-"[SACheckers]-category" = "Checks";
-"[SAObjCCheckers]-category" = "Checks - Objective-C";
-"[SASecurityCheckers]-category" = "Checks - Security";
+"[SAPolicy]-category" = "Analysis Policy";
+"[SACheckers]-category" = "Generic Issues";
+"[SAObjCCheckers]-category" = "Issues - Objective-C";
+"[SASecurityCheckers]-category" = "Issues - Security";
 
-"[CLANG_ANALYZER_DEADCODE_DEADSTORES]-name" = "Dead stores";
+"[RUN_CLANG_STATIC_ANALYZER]-name" = "Analyze During 'Build'";
+"[RUN_CLANG_STATIC_ANALYZER]-description" = "Activating this setting will cause Xcode to run the Clang static analysis tool on qualifying source files during every build.";
+
+"[CLANG_STATIC_ANALYZER_MODE]-name" = "Mode of Analysis for 'Build'";
+"[CLANG_STATIC_ANALYZER_MODE]-description" = "The depth the static analyzer uses during the Build action. Use Deep to exercise the full power of the analyzer. Use Shallow for faster analysis.";
+"[CLANG_STATIC_ANALYZER_MODE]-value-[shallow]" = "Shallow (faster)";
+"[CLANG_STATIC_ANALYZER_MODE]-value-[deep]" = "Deep";
+
+"[CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION]-name" = "Mode of Analysis for 'Analyze'";
+"[CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION]-description" = "The depth the static analyzer uses during the Analyze action. Use Deep to exercise the full power of the analyzer. Use Shallow for faster analysis.";
+"[CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION]-value-[shallow]" = "Shallow (faster)";
+"[CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION]-value-[deep]" = "Deep";
+
+"[CLANG_ANALYZER_DEADCODE_DEADSTORES]-name" = "Dead Stores";
 "[CLANG_ANALYZER_DEADCODE_DEADSTORES]-description" = "Check for values stored to variables that are never read afterwards.";
 "[CLANG_ANALYZER_DEADCODE_DEADSTORES]-value-[NO]" = "No";
 "[CLANG_ANALYZER_DEADCODE_DEADSTORES]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_OBJC_COLLECTIONS]-name" = "Misuse of collections API";
+"[CLANG_ANALYZER_OBJC_COLLECTIONS]-name" = "Misuse of Collections API";
 "[CLANG_ANALYZER_OBJC_COLLECTIONS]-description" = "Warn if CF collections are created with non-pointer-size values. Check if NS collections are initialized with non-Objective-C type elements.";
 "[CLANG_ANALYZER_OBJC_COLLECTIONS]-value-[NO]" = "No";
 "[CLANG_ANALYZER_OBJC_COLLECTIONS]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_OBJC_NSCFERROR]-name" = "Improper handling of CFError and NSError";
+"[CLANG_ANALYZER_OBJC_NSCFERROR]-name" = "Improper Handling of CFError and NSError";
 "[CLANG_ANALYZER_OBJC_NSCFERROR]-description" = "Warn if functions accepting CFErrorRef or NSError cannot indicate if error occured.";
 "[CLANG_ANALYZER_OBJC_NSCFERROR]-value-[NO]" = "No";
 "[CLANG_ANALYZER_OBJC_NSCFERROR]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_OBJC_CFNUMBER]-name" = "Misuse of CFNumberCreate";
-"[CLANG_ANALYZER_OBJC_CFNUMBER]-description" = "Warn on misuse of CFNumberCreate.";
-"[CLANG_ANALYZER_OBJC_CFNUMBER]-value-[NO]" = "No";
-"[CLANG_ANALYZER_OBJC_CFNUMBER]-value-[YES]" = "Yes";
-
-"[CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES]-name" = "Method signatures mismatch";
+"[CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES]-name" = "Method Signatures Mismatch";
 "[CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES]-description" = "Warn about Objective-C method signatures with type incompatibilities.";
 "[CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES]-value-[NO]" = "No";
 "[CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_MALLOC]-name" = "Misuse of malloc/free";
-"[CLANG_ANALYZER_MALLOC]-description" = "Warn about memory leaks, use-after-free, as well as other API misuse.";
-"[CLANG_ANALYZER_MALLOC]-value-[NO]" = "No";
-"[CLANG_ANALYZER_MALLOC]-value-[YES]" = "Yes";
+"[CLANG_ANALYZER_MEMORY_MANAGEMENT]-name" = "Improper Memory Management";
+"[CLANG_ANALYZER_MEMORY_MANAGEMENT]-description" = "Warn about memory leaks, use-after-free, as well as other API misuse.";
+"[CLANG_ANALYZER_MEMORY_MANAGEMENT]-value-[NO]" = "No";
+"[CLANG_ANALYZER_MEMORY_MANAGEMENT]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_OBJC_RETAIN_COUNT]-name" = "Violation of reference counting rules";
+"[CLANG_ANALYZER_OBJC_RETAIN_COUNT]-name" = "Violation of Reference Counting Rules";
 "[CLANG_ANALYZER_OBJC_RETAIN_COUNT]-description" = "Warn on leaks and improper reference count management.";
 "[CLANG_ANALYZER_OBJC_RETAIN_COUNT]-value-[NO]" = "No";
 "[CLANG_ANALYZER_OBJC_RETAIN_COUNT]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_OBJC_ATSYNC]-name" = "'@synchronized' with 'nil' mutex";
-"[CLANG_ANALYZER_OBJC_ATSYNC]-description" = "Warn on 'nil' pointers used as mutexes for @synchronized.";
+"[CLANG_ANALYZER_OBJC_ATSYNC]-name" = "@synchronized with nil mutex";
+"[CLANG_ANALYZER_OBJC_ATSYNC]-description" = "Warn on nil pointers used as mutexes for @synchronized.";
 "[CLANG_ANALYZER_OBJC_ATSYNC]-value-[NO]" = "No";
 "[CLANG_ANALYZER_OBJC_ATSYNC]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_GCD]-name" = "Misuse of GCD";
+"[CLANG_ANALYZER_GCD]-name" = "Misuse of Grand Central Dispatch";
 "[CLANG_ANALYZER_GCD]-description" = "Check for misuses of Grand Central Dispatch API.";
 "[CLANG_ANALYZER_GCD]-value-[NO]" = "No";
 "[CLANG_ANALYZER_GCD]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_DEADCODE_IDEMPOTENT_OPERATIONS]-name" = "Idempotent operations";
+"[CLANG_ANALYZER_DEADCODE_IDEMPOTENT_OPERATIONS]-name" = "Idempotent Operations";
 "[CLANG_ANALYZER_DEADCODE_IDEMPOTENT_OPERATIONS]-description" =
 "This checker is a form of dead code analysis, and flags various \"idempotent operations\" (operations that effectively
   do nothing).  Examples include always assigning a value to variable that
@@ -798,12 +858,12 @@ of the warnings provided by -Wconversion.  [GCC_WARN_64_TO_32_BIT_CONVERSION, -W
 "[CLANG_ANALYZER_SECURITY_BUFFER_OVERFLOW_EXPERIMENTAL]-value-[NO]" = "No";
 "[CLANG_ANALYZER_SECURITY_BUFFER_OVERFLOW_EXPERIMENTAL]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_OBJC_SELF_INIT]-name" = "Violation of 'self = [super init]' rule";
+"[CLANG_ANALYZER_OBJC_SELF_INIT]-name" = "Violation of 'self = [super init]' Rule";
 "[CLANG_ANALYZER_OBJC_SELF_INIT]-description" = "Check that [super init] is properly called within an Objective-C initialization method.";
 "[CLANG_ANALYZER_OBJC_SELF_INIT]-value-[NO]" = "No";
 "[CLANG_ANALYZER_OBJC_SELF_INIT]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_OBJC_UNUSED_IVARS]-name" = "Unused ivars";
+"[CLANG_ANALYZER_OBJC_UNUSED_IVARS]-name" = "Unused Ivars";
 "[CLANG_ANALYZER_OBJC_UNUSED_IVARS]-description" = "Warn about private ivars that are never used.";
 "[CLANG_ANALYZER_OBJC_UNUSED_IVARS]-value-[NO]" = "No";
 "[CLANG_ANALYZER_OBJC_UNUSED_IVARS]-value-[YES]" = "Yes";
@@ -813,12 +873,12 @@ of the warnings provided by -Wconversion.  [GCC_WARN_64_TO_32_BIT_CONVERSION, -W
 "[CLANG_ANALYZER_SECURITY_KEYCHAIN_API]-value-[NO]" = "No";
 "[CLANG_ANALYZER_SECURITY_KEYCHAIN_API]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER]-name" = "Floating point value used as loop counter";
+"[CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER]-name" = "Floating Point Value used as Loop Counter";
 "[CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER]-description" = "Warn on using a floating point value as a loop counter (CERT: FLP30-C, FLP30-CPP).";
 "[CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER]-value-[NO]" = "No";
 "[CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN]-name" = "Unchecked return values";
+"[CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN]-name" = "Unchecked Return Values";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN]-description" = "Warn on uses of sensitive functions whose return values must be always checked.";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN]-value-[NO]" = "No";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN]-value-[YES]" = "Yes";
@@ -828,12 +888,12 @@ of the warnings provided by -Wconversion.  [GCC_WARN_64_TO_32_BIT_CONVERSION, -W
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_GETPW_GETS]-value-[NO]" = "No";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_GETPW_GETS]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_SECURITY_INSECUREAPI_MKSTEMP]-name" = "Use of 'mktemp' or predictable 'mktemps'";
+"[CLANG_ANALYZER_SECURITY_INSECUREAPI_MKSTEMP]-name" = "Use of 'mktemp' or Predictable 'mktemps'";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_MKSTEMP]-description" = "Warn on uses of 'mktemp', which produces predictable temporay files. It is obsoleted by 'mktemps'. Warn when 'mkstemp' is passed fewer than 6 X's in the format string.";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_MKSTEMP]-value-[NO]" = "No";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_MKSTEMP]-value-[YES]" = "Yes";
 
-"[CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND]-name" = "Use of 'rand' functions";
+"[CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND]-name" = "Use of 'rand' Functions";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND]-description" = "Warn on uses of 'rand', 'random', and related functions which produce predictable random number sequences.  Use arc4random instead.";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND]-value-[NO]" = "No";
 "[CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND]-value-[YES]" = "Yes";
