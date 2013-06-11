@@ -15,11 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>6.5.2</string>
+	<string>6.6.2</string>
 	<key>CFBundleSignature</key>
 	<string>clng</string>
 	<key>CFBundleVersion</key>
-	<string>1850</string>
+	<string>2110</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -31,7 +31,7 @@
 	<key>DTSDKName</key>
 	<string></string>
 	<key>DTXcode</key>
-	<string>0452</string>
+	<string>0462</string>
 	<key>DTXcodeBuild</key>
 	<string></string>
 	<key>XC4Compatible</key>
