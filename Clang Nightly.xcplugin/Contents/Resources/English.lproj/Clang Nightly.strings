@@ -34,6 +34,8 @@
 "[ENABLE_NS_ASSERTIONS]-value-[YES]" = "Yes";
 
 "[Language]-category" = "Language";
+"[LanguageObjC]-category" = "Language - Objective C";
+"[LanguageCXX]-category" = "Language - C++";
 "[LanguageModules]-category" = "Language - Modules";
 
 "[GCC_INPUT_FILETYPE]-name" = "Compile Sources As";
