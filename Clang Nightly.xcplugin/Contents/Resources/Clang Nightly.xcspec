@@ -1,5 +1,5 @@
 //
-// LLVM 5.0 compiler build task
+// LLVM 5.1 compiler build task
 // Copyright (c) 2000-2013 Apple Inc.  All rights reserved.
 //
 (
@@ -7,8 +7,8 @@
 		Identifier = "com.apple.compilers.llvm.clang.1_0";
 		Type = Compiler;
 		Class = "XCCompilerSpecificationClang";
-		Name = "Apple LLVM 5.0";
-		Description = "Apple LLVM 5.0 compiler";
+		Name = "Apple LLVM 5.1";
+		Description = "Apple LLVM 5.1 compiler";
 		Vendor = Apple;
 		Version = "5.0";
 		IsAbstract = NO;
@@ -202,7 +202,7 @@
 					"sourcecode.cpp.cpp",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageCXX;
 			},
 			{
 				Name = "CLANG_CXX_LIBRARY";
@@ -226,7 +226,7 @@
 					"<<otherwise>>" = ( "-stdlib=$(value)" );
 				};
 				AppearsAfter = "CLANG_CXX_LANGUAGE_STANDARD";
-				Category = Language;
+				Category = LanguageCXX;
 			},
 			{
 				Name = "GCC_ENABLE_OBJC_GC";
@@ -271,7 +271,7 @@
 					"sourcecode.c.objc",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageObjC;
 			},
 			{
 				Name = "CLANG_LINK_OBJC_RUNTIME";
@@ -292,23 +292,28 @@
 					"sourcecode.c.objc",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
-			},
-			{
-				Name = "CLANG_MODULE_CACHE_PATH";
-				Type = String;
-				DefaultValue = "$(DERIVED_DATA_DIR)/ModuleCache";
-				// Intentionally hidden.
+				Category = LanguageObjC;
 			},
 			{
 				Name = "CLANG_ENABLE_MODULES";
 				Type = Boolean;
 				DefaultValue = NO;
 				CommandLineArgs = {
-						YES = ( "-fmodules", "-fmodules-cache-path=$(CLANG_MODULE_CACHE_PATH)" );
+						YES = ( "-fmodules" );
 						NO	= (); 
 				};
 				Category = LanguageModules;
+			},
+			{
+				Name = "CLANG_MODULE_CACHE_PATH";
+				Type = String;
+				DefaultValue = "$(MODULE_CACHE_DIR)";
+				CommandLineArgs = {
+						"" = ();
+						"<<otherwise>>" = ( "-fmodules-cache-path=$(CLANG_MODULE_CACHE_PATH)" );
+				};
+				Condition = "$(CLANG_ENABLE_MODULES) == YES";
+				// Intentionally hidden.
 			},
 			{
 				Name = "CLANG_MODULES_AUTOLINK";
@@ -316,7 +321,7 @@
 				DefaultValue = YES;
 				CommandLineArgs = {
 						YES = ();
-						NO	= ("-fno-modules-autolink");
+						NO	= ("-fno-autolink");
 				};
 				Condition = "$(CLANG_ENABLE_MODULES) == YES";
 				Category = LanguageModules;
@@ -421,7 +426,7 @@
 					"sourcecode.cpp.cpp",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageCXX;
 			},
 			{
 				Name = "GCC_ENABLE_CPP_RTTI";
@@ -437,7 +442,7 @@
 					"sourcecode.cpp.cpp",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageCXX;
 			},
 			{
 				Name = "GCC_ENABLE_PASCAL_STRINGS";
@@ -482,30 +487,6 @@
 				CommandLineArgs = {
 					YES = (
 						"-msoft-float",
-					);
-					NO = ();
-				};
-				Category = Language;
-			},
-			{
-				Name = "GCC_USE_INDIRECT_FUNCTION_CALLS";
-				Type = Boolean;
-				DefaultValue = NO;
-				CommandLineArgs = {
-					YES = (
-						"-mlong-branch",
-					);
-					NO = ();
-				};
-				Category = Language;
-			},
-			{
-				Name = "GCC_USE_REGISTER_FUNCTION_CALLS";
-				Type = Boolean;
-				DefaultValue = NO;
-				CommandLineArgs = {
-					YES = (
-						"-mlong-calls",
 					);
 					NO = ();
 				};
@@ -626,17 +607,6 @@
 					);
 					NO = ();
 				};
-				Category = CodeGeneration;
-			},
-			{
-				Name = "LLVM_VECTORIZE_LOOPS";
-				Type = Boolean;
-				DefaultValue = NO;
-				CommandLineArgs = {
-					YES = ("-fvectorize");
-					NO	= ();
-				};
-				Condition = "$(LLVM_IMPLICIT_AGGRESSIVE_OPTIMIZATIONS) == NO";
 				Category = CodeGeneration;
 			},
 			{
@@ -1071,11 +1041,19 @@
 			},
 			{
 				Name = "GCC_WARN_UNINITIALIZED_AUTOS";
-				Type = Boolean;
+				Type = Enumeration;
+				AllowedValues = (
+					YES,
+					YES_AGGRESSIVE,
+					NO,
+				);
 				DefaultValue = NO;
 				CommandLineArgs = {
 					YES = (
 						"-Wuninitialized",
+					);
+					YES_AGGRESSIVE = (
+						"-Wconditional-uninitialized",
 					);
 					NO = (
 						"-Wno-uninitialized",
@@ -1332,7 +1310,7 @@
 				Name = "WARNING_CFLAGS";
 				Type = StringList;
 				DefaultValue = "";
-				Category = Warnings;
+				Category = CustomFlags;
 			},
 			{
 				Name = "GCC_PREPROCESSOR_DEFINITIONS";
@@ -1514,7 +1492,7 @@
 					"sourcecode.c.objc",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageObjC;
 			},
 			{
 				Name = "GCC_CW_ASM_SYNTAX";
@@ -1528,22 +1506,6 @@
 				};
 				Architectures = (i386, x86_64);
 				Category = Language;
-			},
-			{
-				Name = "GCC_FAST_OBJC_DISPATCH";
-				Type = Boolean;
-				DefaultValue = YES;
-				CommandLineArgs = {
-					YES = ();
-					NO = (
-						"-fno-objc-direct-dispatch",
-					);
-				};
-				FileTypes = (
-					"sourcecode.c.objc",
-					"sourcecode.cpp.objcpp",
-				);
-				Category = CodeGeneration;
 			},
 			{
 				Name = "GCC_UNROLL_LOOPS";
@@ -1794,6 +1756,7 @@
 				Name = "CLANG_X86_VECTOR_INSTRUCTIONS";
 				Type = Enumeration;
 				AllowedValues = (default, "sse3", "ssse3", "sse4.1", "sse4.2", "avx", "avx2" );
+				AvoidMacroDefinition = YES;
 				DisplayName = "Enable Additional Vector Extensions";
 				DefaultValue = "$(DEFAULT_SSE_LEVEL_4_2_$(GCC_ENABLE_SSE42_EXTENSIONS))";
 				CommandLineArgs = {
@@ -2026,8 +1989,8 @@
 		Identifier = "com.apple.compilers.llvm.clang.1_0.compiler";
 		Type = Compiler;
 		BasedOn = "com.apple.compilers.llvm.clang.1_0";
-		Name = "Apple LLVM 5.0";
-		Description = "Apple LLVM 5.0 compiler";
+		Name = "Apple LLVM 5.1";
+		Description = "Apple LLVM 5.1 compiler";
 		IsAbstract = YES;
 		ShowInCompilerSelectionPopup = NO;
 		Architectures = (
@@ -2124,7 +2087,7 @@
 				Type = Boolean;
 				DefaultValue = YES;
 				CommandLineArgs = {
-					NO = ();
+					NO = ( "-Xclang", "-analyzer-config", "-Xclang", "path-diagnostics-alternate=false", );
 					YES = ( "-Xclang", "-analyzer-config", "-Xclang", "path-diagnostics-alternate=true", );
 				};
 				// Category is hidden.
