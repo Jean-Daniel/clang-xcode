@@ -202,7 +202,7 @@
 					"sourcecode.cpp.cpp",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageCXX;
 			},
 			{
 				Name = "CLANG_CXX_LIBRARY";
@@ -226,7 +226,7 @@
 					"<<otherwise>>" = ( "-stdlib=$(value)" );
 				};
 				AppearsAfter = "CLANG_CXX_LANGUAGE_STANDARD";
-				Category = Language;
+				Category = LanguageCXX;
 			},
 			{
 				Name = "GCC_ENABLE_OBJC_GC";
@@ -271,7 +271,7 @@
 					"sourcecode.c.objc",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageObjC;
 			},
 			{
 				Name = "CLANG_LINK_OBJC_RUNTIME";
@@ -292,7 +292,7 @@
 					"sourcecode.c.objc",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageObjC;
 			},
 			{
 				Name = "CLANG_MODULE_CACHE_PATH";
@@ -316,7 +316,7 @@
 				DefaultValue = YES;
 				CommandLineArgs = {
 						YES = ();
-						NO	= ("-fno-modules-autolink");
+						NO	= ("-fno-autolink");
 				};
 				Condition = "$(CLANG_ENABLE_MODULES) == YES";
 				Category = LanguageModules;
@@ -421,7 +421,7 @@
 					"sourcecode.cpp.cpp",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageCXX;
 			},
 			{
 				Name = "GCC_ENABLE_CPP_RTTI";
@@ -437,7 +437,7 @@
 					"sourcecode.cpp.cpp",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageCXX;
 			},
 			{
 				Name = "GCC_ENABLE_PASCAL_STRINGS";
@@ -1332,7 +1332,7 @@
 				Name = "WARNING_CFLAGS";
 				Type = StringList;
 				DefaultValue = "";
-				Category = Warnings;
+				Category = CustomFlags;
 			},
 			{
 				Name = "GCC_PREPROCESSOR_DEFINITIONS";
@@ -1514,7 +1514,7 @@
 					"sourcecode.c.objc",
 					"sourcecode.cpp.objcpp",
 				);
-				Category = Language;
+				Category = LanguageObjC;
 			},
 			{
 				Name = "GCC_CW_ASM_SYNTAX";
@@ -2124,7 +2124,7 @@
 				Type = Boolean;
 				DefaultValue = YES;
 				CommandLineArgs = {
-					NO = ();
+					NO = ( "-Xclang", "-analyzer-config", "-Xclang", "path-diagnostics-alternate=false", );
 					YES = ( "-Xclang", "-analyzer-config", "-Xclang", "path-diagnostics-alternate=true", );
 				};
 				// Category is hidden.

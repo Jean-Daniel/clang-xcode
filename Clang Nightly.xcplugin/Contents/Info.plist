@@ -19,11 +19,11 @@
 	<key>CFBundleSignature</key>
 	<string>clng</string>
 	<key>CFBundleVersion</key>
-	<string>3504.8</string>
+	<string>3523.1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string></string>
+	<string>5A11344i</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
@@ -33,7 +33,7 @@
 	<key>DTXcode</key>
 	<string>0500</string>
 	<key>DTXcodeBuild</key>
-	<string></string>
+	<string>5A11344i</string>
 	<key>XC4Compatible</key>
 	<true/>
 	<key>XCGCReady</key>
