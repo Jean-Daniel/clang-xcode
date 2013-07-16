@@ -192,28 +192,6 @@ GCC normally generates special code to handle certain built-in functions more ef
 "[GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS]-value-[NO]" = "No";
 "[GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS]-value-[YES]" = "Yes";
 
-"[GCC_USE_INDIRECT_FUNCTION_CALLS]-name" = "Generate Indirect Function Calls";
-"[GCC_USE_INDIRECT_FUNCTION_CALLS]-description" = "Default to making all function calls indirectly, using a register, so that functions which reside further than 32 megabytes (33,554,432 bytes) from the current location can be called.  This setting can be overridden by the \"shortcall\" function attribute, or by \"#pragma longcall(0)\".
-
-On Mach-O (Darwin) systems, -mlongcall directs the compiler emit to the glue for every direct call, and the Darwin linker decides whether to use or discard it.  -mlong-branch is a synonym for -mlongcall.
-
-In the future, we may cause GCC to ignore all longcall specifications when the linker is known to generate glue.
-
-[GCC_USE_INDIRECT_FUNCTION_CALLS, -mlong-branch]";
-"[GCC_USE_INDIRECT_FUNCTION_CALLS]-value-[NO]" = "No";
-"[GCC_USE_INDIRECT_FUNCTION_CALLS]-value-[YES]" = "Yes";
-
-"[GCC_USE_REGISTER_FUNCTION_CALLS]-name" = "Generate Register Subroutine Function Calls";
-"[GCC_USE_REGISTER_FUNCTION_CALLS]-description" = "Tells the compiler to perform function calls by first loading the address of the function into a register and then performing a subroutine call on this register.  This switch is needed if the target function will lie outside of the 64 megabyte addressing range of the offset based version of subroutine call instruction.
-
-Even if this switch is enabled, not all function calls will be turned into long calls.  The heuristic is that static functions, functions which have the short-call attribute, functions that are inside the scope of a #pragma no_long_calls directive and functions whose definitions have already been compiled within the current compilation unit, will not be turned into long calls.  The exception to this rule is that weak function definitions, functions with the long-call attribute or the section attribute, and functions that are within the scope of a #pragma long_calls directive, will always be turned into long calls.
-
-This feature is not enabled by default.  Specifying -mno-long-calls will restore the default behavior, as will placing the function calls within the scope of a #pragma long_calls_off directive.  Note these switches have no effect on how the compiler generates code to handle function calls via function pointers.
-
-[GCC_USE_REGISTER_FUNCTION_CALLS, -mlong-calls]";
-"[GCC_USE_REGISTER_FUNCTION_CALLS]-value-[NO]" = "No";
-"[GCC_USE_REGISTER_FUNCTION_CALLS]-value-[YES]" = "Yes";
-
 "[GCC_PREFIX_HEADER]-name" = "Prefix Header";
 "[GCC_PREFIX_HEADER]-description" = "Implicitly include the named header. The path given should either be a project relative path or an absolute path. [GCC_PREFIX_HEADER]";
 "[GCC_PREFIX_HEADER]-value-[NO]" = "No";
@@ -452,9 +430,10 @@ Also warn about constructions where there may be confusion to which if statement
 "[GCC_WARN_UNINITIALIZED_AUTOS]-name" = "Uninitialized Variables";
 "[GCC_WARN_UNINITIALIZED_AUTOS]-description" = "Warn if a variable might be clobbered by a setjmp call or if an automatic variable is used without prior initialization.
 
-    Note that LLVM may not detect all cases where an automatic variable is initialized or all usage patterns that may lead to use prior to initialization. [GCC_WARN_UNINITIALIZED_AUTOS, -Wuninitialized]";
+    Note that the compiler may not detect all cases where an automatic variable is initialized or all usage patterns that may lead to use prior to initialization.  You can toggle between the normal uninitialized value checking or the more aggressive (conservative) checking which finds more issues but the checking is much stricter. [GCC_WARN_UNINITIALIZED_AUTOS, -Wuninitialized,-Wconditional-uninitialized]";
 "[GCC_WARN_UNINITIALIZED_AUTOS]-value-[NO]" = "No";
 "[GCC_WARN_UNINITIALIZED_AUTOS]-value-[YES]" = "Yes";
+"[GCC_WARN_UNINITIALIZED_AUTOS]-value-[YES_AGGRESSIVE]" = "Yes (Aggressive)";
 
 "[GCC_WARN_UNKNOWN_PRAGMAS]-name" = "Unknown Pragma";
 "[GCC_WARN_UNKNOWN_PRAGMAS]-description" = "Warn when a #pragma directive is encountered which is not understood by GCC.  If this command line option is used, warnings will even be issued for unknown pragmas in system header files.  This is not the case if the warnings were only enabled by the -Wall command line option.  [GCC_WARN_UNKNOWN_PRAGMAS, -Wunknown-pragmas]";
@@ -555,11 +534,6 @@ Fastest, Aggressive Optimizations: This setting enables 'Fastest' but also enabl
 "[LLVM_LTO]-description" = "Enabling this setting allows the optimizer to look across object files in your program and optimize across file boundaries during linking.  [LLVM_LTO, -flto]";
 "[LLVM_LTO]-value-[NO]" = "No";
 "[LLVM_LTO]-value-[YES]" = "Yes";
-
-"[LLVM_VECTORIZE_LOOPS]-name" = "Vectorize Loops";
-"[LLVM_VECTORIZE_LOOPS]-description" = "Enables the loop autovectorizer. When this option is enabled the compiler detects loops that may benefit from vectorization and compiles them to use the SIMD unit of the CPU. Autovectorization makes the code larger but may make it faster by reducing the number of iterations executed. This optimization is mainly profitable for loops with a high trip count.  [LLVM_VECTORIZE_LOOPS, -fvectorize]";
-"[LLVM_VECTORIZE_LOOPS]-value-[NO]" = "No";
-"[LLVM_VECTORIZE_LOOPS]-value-[YES]" = "Yes";
 
 "[GCC_NO_COMMON_BLOCKS]-name" = "No Common Blocks";
 "[GCC_NO_COMMON_BLOCKS]-description" = "In C, allocate even uninitialized global variables in the data section of the object file, rather than generating them as common blocks.  This has the effect that if the same variable is declared (without extern ) in two different compilations, you will get an error when you link them.  The only reason this might be useful is if you wish to verify that the program will work on other systems which always work this way.  [GCC_NO_COMMON_BLOCKS, -fno-common]";
