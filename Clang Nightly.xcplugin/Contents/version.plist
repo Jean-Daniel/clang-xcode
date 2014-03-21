@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>BuildVersion</key>
-	<string>3</string>
+	<string>1</string>
 	<key>CFBundleShortVersionString</key>
-	<string>7.0</string>
+	<string>7.1</string>
 	<key>CFBundleVersion</key>
-	<string>3523.1</string>
+	<string>5067</string>
 	<key>ProjectName</key>
 	<string>IDEXcode3ProjectSupport</string>
 	<key>SourceVersion</key>
-	<string>3523001000000000</string>
+	<string>5067000000000000</string>
 </dict>
 </plist>

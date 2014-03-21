@@ -10,7 +10,7 @@
 		Name = "Clang Nightly";
 		Description = "Clang Nightly Build";
 		Vendor = Apple;
-		Version = "3.4";
+		Version = "3.5";
 		IsAbstract = NO;
 		ShowInCompilerSelectionPopup = YES;
 		FileTypes = (
@@ -326,20 +326,25 @@
 				Category = LanguageObjC;
 			},
 			{
-				Name = "CLANG_MODULE_CACHE_PATH";
-				Type = String;
-				DefaultValue = "$(DERIVED_DATA_DIR)/ModuleCache";
-				// Intentionally hidden.
-			},
-			{
 				Name = "CLANG_ENABLE_MODULES";
 				Type = Boolean;
 				DefaultValue = NO;
 				CommandLineArgs = {
-						YES = ( "-fmodules", "-fmodules-cache-path=$(CLANG_MODULE_CACHE_PATH)" );
+						YES = ( "-fmodules" );
 						NO	= (); 
 				};
 				Category = LanguageModules;
+			},
+			{
+				Name = "CLANG_MODULE_CACHE_PATH";
+				Type = String;
+				DefaultValue = "$(MODULE_CACHE_DIR)";
+				CommandLineArgs = {
+						"" = ();
+						"<<otherwise>>" = ( "-fmodules-cache-path=$(CLANG_MODULE_CACHE_PATH)" );
+				};
+				Condition = "$(CLANG_ENABLE_MODULES) == YES";
+				// Intentionally hidden.
 			},
 			{
 				Name = "CLANG_MODULES_AUTOLINK";
@@ -519,30 +524,6 @@
 				Category = Language;
 			},
 			{
-				Name = "GCC_USE_INDIRECT_FUNCTION_CALLS";
-				Type = Boolean;
-				DefaultValue = NO;
-				CommandLineArgs = {
-					YES = (
-						"-mlong-branch",
-					);
-					NO = ();
-				};
-				Category = Language;
-			},
-			{
-				Name = "GCC_USE_REGISTER_FUNCTION_CALLS";
-				Type = Boolean;
-				DefaultValue = NO;
-				CommandLineArgs = {
-					YES = (
-						"-mlong-calls",
-					);
-					NO = ();
-				};
-				Category = Language;
-			},
-			{
 				Name = "GCC_PREFIX_HEADER";
 				Type = String;
 				DefaultValue = "";
@@ -677,17 +658,6 @@
 					);
 					NO = ();
 				};
-				Category = CodeGeneration;
-			},
-			{
-				Name = "LLVM_VECTORIZE_LOOPS";
-				Type = Boolean;
-				DefaultValue = NO;
-				CommandLineArgs = {
-					YES = ("-fvectorize");
-					NO	= ();
-				};
-				Condition = "$(LLVM_IMPLICIT_AGGRESSIVE_OPTIMIZATIONS) == NO";
 				Category = CodeGeneration;
 			},
 			{
@@ -1122,11 +1092,19 @@
 			},
 			{
 				Name = "GCC_WARN_UNINITIALIZED_AUTOS";
-				Type = Boolean;
+				Type = Enumeration;
+				AllowedValues = (
+					YES,
+					YES_AGGRESSIVE,
+					NO,
+				);
 				DefaultValue = NO;
 				CommandLineArgs = {
 					YES = (
 						"-Wuninitialized",
+					);
+					YES_AGGRESSIVE = (
+						"-Wconditional-uninitialized",
 					);
 					NO = (
 						"-Wno-uninitialized",
@@ -1581,22 +1559,6 @@
 				Category = Language;
 			},
 			{
-				Name = "GCC_FAST_OBJC_DISPATCH";
-				Type = Boolean;
-				DefaultValue = YES;
-				CommandLineArgs = {
-					YES = ();
-					NO = (
-						"-fno-objc-direct-dispatch",
-					);
-				};
-				FileTypes = (
-					"sourcecode.c.objc",
-					"sourcecode.cpp.objcpp",
-				);
-				Category = CodeGeneration;
-			},
-			{
 				Name = "GCC_UNROLL_LOOPS";
 				Type = Boolean;
 				DefaultValue = NO;
@@ -1845,6 +1807,7 @@
 				Name = "CLANG_X86_VECTOR_INSTRUCTIONS";
 				Type = Enumeration;
 				AllowedValues = (default, "sse3", "ssse3", "sse4.1", "sse4.2", "avx", "avx2" );
+				AvoidMacroDefinition = YES;
 				DisplayName = "Enable Additional Vector Extensions";
 				DefaultValue = "$(DEFAULT_SSE_LEVEL_4_2_$(GCC_ENABLE_SSE42_EXTENSIONS))";
 				CommandLineArgs = {
@@ -2545,6 +2508,74 @@
 				);
 			},
 		);
+	},
+	{
+			Identifier = "com.apple.compilers.llvm.clang.1_0.migrator";
+			Type = Compiler;
+			BasedOn = "com.apple.compilers.llvm.clang.1_0";
+			Name = "ObjC Migrator";
+			Description = "Apple Clang ObjC Migrator";
+			Architectures = (
+				i386,
+				"x86_64",
+				armv6,
+				armv7,
+			);
+			ExecPath = "$(CLANG)";
+			OutputDir = "$(TEMP_DIR)/Migrator";
+			OutputFileExtension = remap;
+			OutputsAreProducts = YES;
+			IsAbstract = YES;
+			CommandResultsPostprocessor = "XCClangResultsPostprocessor";
+			SupportsSerializedDiagnostics = YES;
+			"ShowInCompilerSelectionPopup" = NO;
+			"ShowOnlySelfDefinedProperties" = YES;
+			SourceFileOption = "--migrate";
+			FileTypes = (
+				"sourcecode.c.objc",
+				"sourcecode.cpp.objcpp",
+		);
+			Options = (
+				{
+					Name = CLANG;
+					Type = Path;
+					DefaultValue = clang;
+				},
+			);
+	},
+	{
+			Identifier = "com.apple.compilers.llvm.clang.nigthly.migrator.xctest";
+			Type = Compiler;
+			BasedOn = "com.apple.compilers.llvm.clang.nigthly";
+			Name = "XCTest Migrator";
+			Description = "Apple Clang XCTest Migrator";
+			Architectures = (
+				i386,
+				"x86_64",
+				armv6,
+				armv7,
+			);
+			ExecPath = "$(CLANG)";
+			OutputDir = "$(TEMP_DIR)/Migrator";
+			OutputFileExtension = remap;
+			OutputsAreProducts = YES;
+			IsAbstract = YES;
+			CommandResultsPostprocessor = "XCClangResultsPostprocessor";
+			SupportsSerializedDiagnostics = YES;
+			"ShowInCompilerSelectionPopup" = NO;
+			"ShowOnlySelfDefinedProperties" = YES;
+			SourceFileOption = "--migrate-xct";
+			FileTypes = (
+				"sourcecode.c.objc",
+				"sourcecode.cpp.objcpp",
+		);
+			Options = (
+				{
+					Name = CLANG;
+					Type = Path;
+					DefaultValue = clang;
+				},
+			);
 	},
 	{
 		Identifier = "com.apple.compilers.llvm.clang.nigthly.astbuilder";
