@@ -2510,9 +2510,9 @@
 		);
 	},
 	{
-			Identifier = "com.apple.compilers.llvm.clang.1_0.migrator";
+			Identifier = "com.apple.compilers.llvm.clang.nightly.migrator";
 			Type = Compiler;
-			BasedOn = "com.apple.compilers.llvm.clang.1_0";
+			BasedOn = "com.apple.compilers.llvm.clang.nightly";
 			Name = "ObjC Migrator";
 			Description = "Apple Clang ObjC Migrator";
 			Architectures = (
@@ -2544,9 +2544,9 @@
 			);
 	},
 	{
-			Identifier = "com.apple.compilers.llvm.clang.nigthly.migrator.xctest";
+			Identifier = "com.apple.compilers.llvm.clang.nightly.migrator.xctest";
 			Type = Compiler;
-			BasedOn = "com.apple.compilers.llvm.clang.nigthly";
+			BasedOn = "com.apple.compilers.llvm.clang.nightly";
 			Name = "XCTest Migrator";
 			Description = "Apple Clang XCTest Migrator";
 			Architectures = (
@@ -2578,7 +2578,7 @@
 			);
 	},
 	{
-		Identifier = "com.apple.compilers.llvm.clang.nigthly.astbuilder";
+		Identifier = "com.apple.compilers.llvm.clang.nightly.astbuilder";
 		Type = Compiler;
 		BasedOn = "com.apple.compilers.llvm.clang.nightly";
 		Name = "AST Builder";
