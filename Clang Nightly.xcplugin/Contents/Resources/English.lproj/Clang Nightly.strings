@@ -1,16 +1,16 @@
 //
-// Apple LLVM 5.0
+// Apple LLVM 6.0
 // Xcode Compiler Specification
 // English localization
 //
-// Copyright (c) 2009-2013 Apple Inc.  All rights reserved.
+// Copyright (c) 2009-2014 Apple Inc.  All rights reserved.
 //
 
 // Localized strings for basic info
 
-"Name" = "Apple LLVM 5.0";
-"Description" = "Apple LLVM 5.0 Compiler";
-"Version" = "5.0";
+"Name" = "Apple LLVM 6.0";
+"Description" = "Apple LLVM 6.0 Compiler";
+"Version" = "6.0";
 "Vendor" = "Apple";
 
 // Localized strings for compiler options
@@ -24,9 +24,14 @@
 "[GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS]-description" = "Space-separated list of preprocessor macros of the form \"foo\" or \"foo=bar\". These macros are not used when precompiling a prefix header file. [GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS, -D]";
 
 "[ENABLE_NS_ASSERTIONS]-name" = "Enable Foundation Assertions";
-"[ENABLE_NS_ASSERTIONS]-description" = "Controls whether assertion logic provided by NSAssert is included in the preprocessed source code our is elided during preprocessing.  Disabling assertions can improve code performance.  [ENABLE_NS_ASSERTIONS]";
+"[ENABLE_NS_ASSERTIONS]-description" = "Controls whether assertion logic provided by NSAssert is included in the preprocessed source code or is elided during preprocessing.  Disabling assertions can improve code performance.  [ENABLE_NS_ASSERTIONS]";
 "[ENABLE_NS_ASSERTIONS]-value-[NO]" = "No";
 "[ENABLE_NS_ASSERTIONS]-value-[YES]" = "Yes";
+
+"[ENABLE_STRICT_OBJC_MSGSEND]-name" = "Enable Strict Checking of objc_msgSend Calls";
+"[ENABLE_STRICT_OBJC_MSGSEND]-description" = "Controls whether objc_msgSend calls must be cast to the appropriate function pointer type before being called.  [ENABLE_STRICT_OBJC_MSGSEND]";
+"[ENABLE_STRICT_OBJC_MSGSEND]-value-[NO]" = "No";
+"[ENABLE_STRICT_OBJC_MSGSEND]-value-[YES]" = "Yes";
 
 "[Language]-category" = "Language";
 "[LanguageObjC]-category" = "Language - Objective C";
@@ -98,6 +103,10 @@ C++11: Accept the ISO C++ 2011 standard with amendments, but not GNU extensions.
 
 GNU++11: Accept the ISO C++ 2011 standard with amendments and GNU extensions. [-std=gnu++11]
 
+C++14: Accept the ISO C++ 2014 standard with amendments, but not GNU extensions. [-std=c++14]
+
+GNU++11: Accept the ISO C++ 2014 standard with amendments and GNU extensions. [-std=gnu++14]
+
 Compiler Default: Tells the compiler to use its default C++ language dialect. This is normally the best choice unless you have specific needs. (Currently equivalent to GNU++98.)
 
 [CLANG_CXX_LANGUAGE_STANDARD]
@@ -107,6 +116,7 @@ Compiler Default: Tells the compiler to use its default C++ language dialect. Th
 "[CLANG_CXX_LANGUAGE_STANDARD]-description-[c++98]" = "Accept ISO C++ 1998 with amendments, but not GNU extensions. [-std=c++98]";
 "[CLANG_CXX_LANGUAGE_STANDARD]-value-[gnu++98]" = "GNU++98 [-std=gnu++98]";
 "[CLANG_CXX_LANGUAGE_STANDARD]-description-[gnu++98]" = "Accept ISO C++ 1998 with amendments and GNU extensions. [-std=gnu++98]";
+
 /* Note that the value must remain c++0x, for backwards compatibility. */
 "[CLANG_CXX_LANGUAGE_STANDARD]-value-[c++0x]" = "C++11 [-std=c++11]";
 /* Note that the value must remain c++0x, for backwards compatibility. */
@@ -115,6 +125,12 @@ Compiler Default: Tells the compiler to use its default C++ language dialect. Th
 "[CLANG_CXX_LANGUAGE_STANDARD]-value-[gnu++0x]" = "GNU++11 [-std=gnu++11]";
 /* Note that the value must remain gnu++0x, for backwards compatibility. */
 "[CLANG_CXX_LANGUAGE_STANDARD]-description-[gnu++0x]" = "Accept the ISO C++ 2011 standard with amendments and GNU extensions. [-std=gnu++11]";
+
+"[CLANG_CXX_LANGUAGE_STANDARD]-value-[c++14]" = "C++14 [-std=c++14]";
+"[CLANG_CXX_LANGUAGE_STANDARD]-description-[c++14]" = "Accept the ISO C++ 2014 standard with amendments, but not GNU extensions. [-std=c++14]";
+"[CLANG_CXX_LANGUAGE_STANDARD]-value-[gnu++14]" = "GNU++14 [-std=gnu++14]";
+"[CLANG_CXX_LANGUAGE_STANDARD]-description-[gnu++14]" = "Accept the ISO C++ 2014 standard with amendments and GNU extensions. [-std=gnu++14]";
+
 "[CLANG_CXX_LANGUAGE_STANDARD]-value-[compiler-default]" = "Compiler Default";
 "[CLANG_CXX_LANGUAGE_STANDARD]-description-[compiler-default]" = "Tells the compiler to use its default C++ language dialect. This is normally the best choice unless you have specific needs. (Currently equivalent to GNUC++98.)";
 
@@ -279,6 +295,11 @@ This option does not warn about designated initializers, so the following modifi
 "[CLANG_WARN_DOCUMENTATION_COMMENTS]-description" = "Warns about issues in documentation comments (doxygen-style) such as missing or incorrect documentation tags.  [CLANG_WARN_DOCUMENTATION_COMMENTS, -Wdocumentation]";
 "[CLANG_WARN_DOCUMENTATION_COMMENTS]-value-[NO]" = "No";
 "[CLANG_WARN_DOCUMENTATION_COMMENTS]-value-[YES]" = "Yes";
+
+"[CLANG_WARN_UNREACHABLE_CODE]-name" = "Unreachable Code";
+"[CLANG_WARN_UNREACHABLE_CODE]-description" = "Warns about potentially unreachable code.  [CLANG_WARN_UNREACHABLE_CODE, -Wunreachable-code]";
+"[CLANG_WARN_UNREACHABLE_CODE]-value-[NO]" = "No";
+"[CLANG_WARN_UNREACHABLE_CODE]-value-[YES]" = "Yes";
 
 "[CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES]-name" = "Implicit Atomic Objective-C Properties";
 "[CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES]-description" = "Warn about @property declarations that are implicitly atomic.";
@@ -621,7 +642,7 @@ The restrictions on offsetof may be relaxed in a future version of the C++ stand
 "[CLANG_ENABLE_OBJC_ARC]-description" = "Compiles reference-counted Objective-C code (when garbage collection is not enabled) to use Automatic Reference Counting.
 Code compiled using automated reference counting is compatible with other code (e.g., frameworks) compiled using either
 manual reference counting (i.e., traditional \"retain\" and \"release\" messages) or automated reference counting.  Using this mode is currently
-incompatible with compiling code to use Objective-C Garbage Collection.";
+incompatible with compiling code to use Objective-C Garbage Collection. [CLANG_ENABLE_OBJC_ARC, -fobjc-arc]";
 "[CLANG_ENABLE_OBJC_ARC]-value-[YES]" = "Use automated reference counting";
 "[CLANG_ENABLE_OBJC_ARC]-value-[NO]" = "Use manual (traditional) reference counting";
 
@@ -631,7 +652,7 @@ code, implicitly link in Foundation (and if deploying back to an older OS) a
 backwards compatibility library to allow newer language features to run on
 an OS where the runtime support is not natively available.  Most targets
 that use Objective-C will want to use this, although there are rare cases
-where a target may wish to opt out of this behavior.";
+where a target may wish to opt out of this behavior. [CLANG_LINK_OBJC_RUNTIME, -fobjc-link-runtime]";
 "[CLANG_LINK_OBJC_RUNTIME]-value-[YES]" = "Yes";
 "[CLANG_LINK_OBJC_RUNTIME]-value-[No]" = "No";
 
@@ -712,10 +733,16 @@ For more information, see <http://developer.apple.com/documentation/DeveloperToo
 "[CLANG_WARN_BOOL_CONVERSION]-value-[NO]" = "No";
 "[CLANG_WARN_BOOL_CONVERSION]-value-[YES]" = "Yes";
 
+"[CLANG_WARN_ASSIGN_ENUM]-name" = "Out-of-Range Enum Assignments";
+"[CLANG_WARN_ASSIGN_ENUM]-description" = "Warn about assigning integer constants to enum values that are out of the range of the enumerated type.  [CLANG_WARN_ASSIGN_ENUM, -Wassign-enum]";
+"[CLANG_WARN_ASSIGN_ENUM]-value-[NO]" = "No";
+"[CLANG_WARN_ASSIGN_ENUM]-value-[YES]" = "Yes";
+
 "[CLANG_WARN_ENUM_CONVERSION]-name" = "Implicit Enum Conversions";
 "[CLANG_WARN_ENUM_CONVERSION]-description" = "Warn about implicit conversions between different kinds of enum values.  For example, this can catch issues when using the wrong enum flag as an argument to a function or method.  [CLANG_WARN_ENUM_CONVERSION, -Wenum-conversion]";
 "[CLANG_WARN_ENUM_CONVERSION]-value-[NO]" = "No";
 "[CLANG_WARN_ENUM_CONVERSION]-value-[YES]" = "Yes";
+
 
 "[CLANG_WARN_IMPLICIT_SIGN_CONVERSION]-name" = "Implicit Signedness Conversions";
 "[CLANG_WARN_IMPLICIT_SIGN_CONVERSION]-description" = "Warn about implicit integer conversions that change the signedness of an integer value.  [CLANG_WARN_IMPLICIT_SIGN_CONVERSION, -Wsign-conversion]";
@@ -727,6 +754,15 @@ For more information, see <http://developer.apple.com/documentation/DeveloperToo
 of the warnings provided by -Wconversion.  [GCC_WARN_64_TO_32_BIT_CONVERSION, -Wshorten-64-to-32]";
 "[GCC_WARN_64_TO_32_BIT_CONVERSION]-value-[NO]" = "No";
 "[GCC_WARN_64_TO_32_BIT_CONVERSION]-value-[YES]" = "Yes";
+
+"[CLANG_OPTIMIZATION_PROFILE_FILE]-name" = "Optimization Profile File";
+"[CLANG_OPTIMIZATION_PROFILE_FILE]-description" = "The path to the file of the profile data to use when 'Use Optimization Profile' is enabled.  [CLANG_OPTIMIZATION_PROFILE_FILE]";
+
+"[CLANG_USE_OPTIMIZATION_PROFILE]-name" = "Use Optimization Profile";
+"[CLANG_USE_OPTIMIZATION_PROFILE]-description" = "When this setting is enabled, clang will use the optimization profile collected for a target when building it.  [CLANG_USE_OPTIMIZATION_PROFILE, -fprofile-instr-use=]";
+"[CLANG_USE_OPTIMIZATION_PROFILE]-value-[NO]" = "No";
+"[CLANG_USE_OPTIMIZATION_PROFILE]-value-[YES]" = "Yes";
+
 
 "[SAPolicy]-category" = "Analysis Policy";
 "[SACheckers]-category" = "Generic Issues";

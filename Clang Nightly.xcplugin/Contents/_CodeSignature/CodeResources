@@ -6,17 +6,17 @@
 	<dict>
 		<key>Resources/Clang LLVM 1.0.xcspec</key>
 		<data>
-		5nwuWNVy1Dwt0Ix1767EAeMszfc=
+		fc1RB7o3hIGXx6RvE/z2IaNQeTE=
 		</data>
 		<key>Resources/Default Compiler.xcspec</key>
 		<data>
-		8Ww6kE1sfvXZJiR9BoDwNT9yZCY=
+		06q/PFx4DaerpAf3vgDs0+l9S9o=
 		</data>
-		<key>Resources/English.lproj/Apple LLVM 5.1.strings</key>
+		<key>Resources/English.lproj/Apple LLVM 6.0.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dV9AccMcE8hgNTAV00PzqQruTSs=
+			/T+dda1TgJhEBnxKOMZHlK2LaEg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -32,28 +32,28 @@
 		</dict>
 		<key>version.plist</key>
 		<data>
-		DIXeXcuGQBlTSdUi4S7iSxP9CkQ=
+		lyvmb1TVLyKg0kxITeAwsUJJVDM=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Info.plist</key>
 		<data>
-		pbDAPUaqmX2sjM0hRWJhGaGCxAw=
+		BS/BriwWhTeLYvqWSTn9co2v4dQ=
 		</data>
 		<key>Resources/Clang LLVM 1.0.xcspec</key>
 		<data>
-		5nwuWNVy1Dwt0Ix1767EAeMszfc=
+		fc1RB7o3hIGXx6RvE/z2IaNQeTE=
 		</data>
 		<key>Resources/Default Compiler.xcspec</key>
 		<data>
-		8Ww6kE1sfvXZJiR9BoDwNT9yZCY=
+		06q/PFx4DaerpAf3vgDs0+l9S9o=
 		</data>
-		<key>Resources/English.lproj/Apple LLVM 5.1.strings</key>
+		<key>Resources/English.lproj/Apple LLVM 6.0.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dV9AccMcE8hgNTAV00PzqQruTSs=
+			/T+dda1TgJhEBnxKOMZHlK2LaEg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -69,7 +69,7 @@
 		</dict>
 		<key>version.plist</key>
 		<data>
-		DIXeXcuGQBlTSdUi4S7iSxP9CkQ=
+		lyvmb1TVLyKg0kxITeAwsUJJVDM=
 		</data>
 	</dict>
 	<key>rules</key>
@@ -179,7 +179,7 @@
 			<key>weight</key>
 			<real>50</real>
 		</dict>
-		<key>^(Frameworks|SharedFrameworks|Plugins|Plug-ins|XPCServices|Helpers|MacOS)/</key>
+		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
 		<dict>
 			<key>nested</key>
 			<true/>
