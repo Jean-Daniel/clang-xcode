@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13A598</string>
+	<string>14A223</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleIdentifier</key>
@@ -15,25 +15,25 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>7.1</string>
+	<string>8.0</string>
 	<key>CFBundleSignature</key>
 	<string>clng</string>
 	<key>CFBundleVersion</key>
-	<string>5067</string>
+	<string>6169.22</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>5A11344i</string>
+	<string></string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>13A596</string>
+	<string>14A236a</string>
 	<key>DTSDKName</key>
-	<string>macosx10.9internal</string>
+	<string>macosx10.10internal</string>
 	<key>DTXcode</key>
-	<string>0510</string>
+	<string>0600</string>
 	<key>DTXcodeBuild</key>
-	<string>5A11344i</string>
+	<string></string>
 	<key>XC4Compatible</key>
 	<true/>
 	<key>XCGCReady</key>
@@ -43,6 +43,7 @@
 	<key>DVTPlugInCompatibilityUUIDs</key>
 	<array>
 		<string>A2E4D43F-41F4-4FB9-BB94-7177011C9AED</string>
+		<string>AD68E85B-441B-4301-B564-A45E4919A6AD</string>
 	</array>
 </dict>
 </plist>

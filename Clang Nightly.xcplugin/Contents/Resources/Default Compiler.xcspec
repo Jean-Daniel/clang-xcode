@@ -34,4 +34,8 @@
     DashIFlagAcceptsHeadermaps = No;
     UseCPlusPlusCompilerDriverWhenBundlizing = No;
     SupportsIsysroot = NO;
+    ExecDescription = "Compile $(InputFile)";
+    ProgressDescription = "Compiling $(CommandProgressByType) source files";
+    ExecDescriptionForPrecompile = "Precompile $(InputFile)";
+    ProgressDescriptionForPrecompile = "Precompiling $(CommandProgressByType) prefix headers";
 }

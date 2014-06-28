@@ -4,19 +4,19 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Resources/Clang LLVM 1.0.xcspec</key>
+		<key>Resources/Clang Nightly.xcspec</key>
 		<data>
-		5nwuWNVy1Dwt0Ix1767EAeMszfc=
+		Zg0uZFtWrse3RjoLCM1ec3yJHKk=
 		</data>
 		<key>Resources/Default Compiler.xcspec</key>
 		<data>
-		8Ww6kE1sfvXZJiR9BoDwNT9yZCY=
+		06q/PFx4DaerpAf3vgDs0+l9S9o=
 		</data>
-		<key>Resources/English.lproj/Apple LLVM 5.1.strings</key>
+		<key>Resources/English.lproj/Clang Nightly.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dV9AccMcE8hgNTAV00PzqQruTSs=
+			KFZeer9HuzRa98Ne+JVRDD1LPjo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -25,35 +25,31 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DP2JDcqFJBkmp9RPwfvgCKg72TQ=
+			+EB59dxrt/Hsp46gs7CxwSOt6og=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>version.plist</key>
 		<data>
-		DIXeXcuGQBlTSdUi4S7iSxP9CkQ=
+		lyvmb1TVLyKg0kxITeAwsUJJVDM=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Info.plist</key>
+		<key>Resources/Clang Nightly.xcspec</key>
 		<data>
-		pbDAPUaqmX2sjM0hRWJhGaGCxAw=
-		</data>
-		<key>Resources/Clang LLVM 1.0.xcspec</key>
-		<data>
-		5nwuWNVy1Dwt0Ix1767EAeMszfc=
+		Zg0uZFtWrse3RjoLCM1ec3yJHKk=
 		</data>
 		<key>Resources/Default Compiler.xcspec</key>
 		<data>
-		8Ww6kE1sfvXZJiR9BoDwNT9yZCY=
+		06q/PFx4DaerpAf3vgDs0+l9S9o=
 		</data>
-		<key>Resources/English.lproj/Apple LLVM 5.1.strings</key>
+		<key>Resources/English.lproj/Clang Nightly.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dV9AccMcE8hgNTAV00PzqQruTSs=
+			KFZeer9HuzRa98Ne+JVRDD1LPjo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -62,211 +58,110 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DP2JDcqFJBkmp9RPwfvgCKg72TQ=
+			+EB59dxrt/Hsp46gs7CxwSOt6og=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>version.plist</key>
 		<data>
-		DIXeXcuGQBlTSdUi4S7iSxP9CkQ=
+		lyvmb1TVLyKg0kxITeAwsUJJVDM=
 		</data>
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>@[0-9]+</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
-		</dict>
-		<key>\.licns$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>50</real>
-		</dict>
 		<key>^Resources/</key>
 		<true/>
 		<key>^Resources/.*\.lproj/</key>
 		<dict>
-			<key>omit</key>
+			<key>optional</key>
 			<true/>
 			<key>weight</key>
-			<real>30</real>
+			<real>1000</real>
 		</dict>
 		<key>^Resources/.*\.lproj/locversion.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
-			<real>30</real>
-		</dict>
-		<key>^Resources/.*\.nib/classes\.nib$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>5</real>
-		</dict>
-		<key>^Resources/.*\.nib/data\.dependency$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>5</real>
-		</dict>
-		<key>^Resources/.*\.nib/designable\.nib$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>5</real>
-		</dict>
-		<key>^Resources/.*\.nib/info\.nib$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>5</real>
-		</dict>
-		<key>^Resources/Apple-internal build rules\.xcbuildrules$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
-		</dict>
-		<key>^Resources/BridgeSupport/[^/]*\.(bridgesupport|dylib)$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
-		</dict>
-		<key>^Resources/Distill.xcspec$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>100</real>
-		</dict>
-		<key>^Resources/English\.lproj/</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>40</real>
+			<real>1100</real>
 		</dict>
 		<key>^version.plist$</key>
 		<true/>
 	</dict>
 	<key>rules2</key>
 	<dict>
-		<key>@[0-9]+</key>
+		<key>.*\.dSYM($|/)</key>
+		<dict>
+			<key>weight</key>
+			<real>11</real>
+		</dict>
+		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
-			<real>10</real>
+			<real>2000</real>
 		</dict>
-		<key>\.licns$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>50</real>
-		</dict>
-		<key>^(Frameworks|SharedFrameworks|Plugins|Plug-ins|XPCServices|Helpers|MacOS)/</key>
+		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
 		<dict>
 			<key>nested</key>
 			<true/>
 			<key>weight</key>
-			<real>0.0</real>
+			<real>10</real>
 		</dict>
-		<key>^Resources/</key>
+		<key>^.*</key>
 		<true/>
-		<key>^Resources/.*\.lproj/</key>
+		<key>^Info\.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
-			<real>30</real>
+			<real>20</real>
+		</dict>
+		<key>^PkgInfo$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^Resources/</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^Resources/.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
 		</dict>
 		<key>^Resources/.*\.lproj/locversion.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
-			<real>30</real>
-		</dict>
-		<key>^Resources/.*\.nib/classes\.nib$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>5</real>
-		</dict>
-		<key>^Resources/.*\.nib/data\.dependency$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>5</real>
-		</dict>
-		<key>^Resources/.*\.nib/designable\.nib$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>5</real>
-		</dict>
-		<key>^Resources/.*\.nib/info\.nib$</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>5</real>
-		</dict>
-		<key>^Resources/Apple-internal build rules\.xcbuildrules$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
-		</dict>
-		<key>^Resources/BridgeSupport/[^/]*\.(bridgesupport|dylib)$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
-		</dict>
-		<key>^Resources/Distill.xcspec$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>100</real>
-		</dict>
-		<key>^Resources/English\.lproj/</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>40</real>
+			<real>1100</real>
 		</dict>
 		<key>^[^/]+$</key>
 		<dict>
-			<key>top</key>
+			<key>nested</key>
 			<true/>
 			<key>weight</key>
-			<real>0.0</real>
+			<real>10</real>
 		</dict>
-		<key>^version.plist$</key>
-		<true/>
+		<key>^embedded\.provisionprofile$</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^version\.plist$</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
 	</dict>
 </dict>
 </plist>

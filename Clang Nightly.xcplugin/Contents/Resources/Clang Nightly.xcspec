@@ -1,6 +1,6 @@
 //
 // Clang Nightly build task
-// Copyright (c) 2000-2013 Apple Inc.  All rights reserved.
+// Copyright (c) 2000-2014 Apple Inc.  All rights reserved.
 //
 (
 	{
@@ -26,6 +26,10 @@
 		);
 		BuiltinJambaseRuleName = ProcessC;
 		ExecPath = "$(CLANG)";
+		ExecDescription = "Compile $(InputFile)";
+		ProgressDescription = "Compiling $(CommandProgressByType) source files";
+		ExecDescriptionForPrecompile = "Precompile $(InputFile)";
+		ProgressDescriptionForPrecompile = "Precompiling $(CommandProgressByType) prefix headers";
 		UseCPlusPlusCompilerDriverWhenBundlizing = Yes;
 		CommandOutputParser = "XCSimpleBufferedCommandOutputParser";
 		SupportsHeadermaps = Yes;
@@ -54,6 +58,8 @@
 			"-fmodules-autolink",
 			"-fmodules-prune-interval*",
 			"-fmodules-prune-after*",
+			"-fbuild-session-timestamp*",
+			"-fmodules-validate-once-per-build-session",
 		);
 		MessageCategoryInfoOptions = ( "--print-diagnostic-categories" );
 		Options = (
@@ -190,8 +196,10 @@
 					"gnu++98",
 					"c++0x",
 					"gnu++0x",
-					"c++1y",
-					"gnu++1y",
+					"c++14",
+					"gnu++14",
+					"c++1z",
+					"gnu++1z",
 					"compiler-default",
 				);
 				DefaultValue = "compiler-default";
@@ -201,6 +209,10 @@
 					// maintain compatibility of old build settings.
 					"c++0x" = ( "-std=c++11" );
 					"gnu++0x" = ( "-std=gnu++11" );
+					// C++14 is not ratified yet.
+					// Map to current compiler flag.
+					"c++14" = ( "-std=c++1y" );
+					"gnu++14" = ( "-std=gnu++1y" );
 					// Default for everything else.
 					"<<otherwise>>" = (
 						"-std=$(value)",
@@ -360,7 +372,7 @@
 			{
 				Name = "CLANG_MODULES_PRUNE_INTERVAL";
 				Type = String;
-				DefaultValue = "";
+				DefaultValue = "86400";
 				CommandLineArgs = {
 						"" = ();
 						"<<otherwise>>" = (
@@ -373,7 +385,7 @@
 			{
 				Name = "CLANG_MODULES_PRUNE_AFTER";
 				Type = String;
-				DefaultValue = "";
+				DefaultValue = "345600";
 				CommandLineArgs = {
 						"" = ();
 						"<<otherwise>>" = (
@@ -392,6 +404,67 @@
 				);
 				Condition = "$(CLANG_ENABLE_MODULES) == YES";
 				// Intentionally hidden; part of CLANG_ENABLE_MODULES.
+			},
+			{
+				Name = "CLANG_MODULES_VALIDATE_SYSTEM_HEADERS";
+				Type = Boolean;
+				DefaultValue = NO;
+				CommandLineArgs = {
+					YES = ("-fmodules-validate-system-headers",);
+					NO = ();
+				};
+				Condition = "$(CLANG_ENABLE_MODULES) == YES";
+				// Hidden.
+			},
+			{
+				Name = "CLANG_MODULES_VALIDATION_TIMESTAMP";
+				Type = String;
+				DefaultValue = "";
+				CommandLineArgs = {
+					"" = ();
+					"<<otherwise>>" = (
+						"-fbuild-session-timestamp=$(value)",
+						"-fmodules-validate-once-per-build-session",
+					);
+				};
+				Condition = "$(CLANG_ENABLE_MODULES) == YES";
+			},
+			{
+				Name = "CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES";
+				Type = Boolean;
+				DefaultValue = NO;
+				CommandLineArgs = {
+					YES = ();
+					NO = ("-Wnon-modular-include-in-framework-module",
+						  "-Werror=non-modular-include-in-framework-module");
+				};
+				Condition = "$(CLANG_ENABLE_MODULES) == YES";
+				Category = LanguageModules;
+				DisplayName = "Allow Non-modular Includes In Framework Modules";
+				Description = "Enabling this setting allows non-modular includes to be used from within framework modules. This is inherently unsafe, as such headers might cause duplicate definitions when used by any client that imports both the framework and the non-modular includes themselves. [CLANG_ENABLE_MODULES]";
+			},
+			{
+				Name = "CLANG_ENABLE_MODULE_IMPLEMENTATION_OF";
+				Type = Boolean;
+				DefaultValue = YES;
+				CommandLineArgs = {
+					NO = ();
+					YES = ("-fmodule-implementation-of", "$(PRODUCT_MODULE_NAME)");
+				};
+				Condition = "$(CLANG_ENABLE_MODULES) == YES && $(DEFINES_MODULE) == YES";
+			},
+			{
+				Name = "CLANG_ENABLE_APP_EXTENSION";
+				Type = Boolean;
+				DefaultValue = "$(APPLICATION_EXTENSION_API_ONLY)";
+				CommandLineArgs = {
+					YES = ( "-fapplication-extension" );
+					NO	= ();
+				};
+				AdditionalLinkerArgs = {
+					YES = ( "-fapplication-extension" );
+					NO = ();
+				};
 			},
 			{
 				Name = "GCC_CHAR_IS_UNSIGNED_CHAR";
@@ -804,6 +877,16 @@
 				Category = Warnings;
 			},
 			{
+				Name = "CLANG_WARN_UNREACHABLE_CODE";
+				Type = Boolean;
+				DefaultValue = NO;
+				CommandLineArgs = {
+					YES = ( "-Wunreachable-code" );
+					NO	= ();
+				};
+				Category = Warnings;
+			},
+			{
 				Name = "CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES";
 				Type = Boolean;
 				DefaultValue = NO;
@@ -833,7 +916,7 @@
 					YES_ERROR = ( "-Werror=deprecated-objc-isa-usage" );
 					NO = ( "-Wno-deprecated-objc-isa-usage");
 				};
-				Category = Warnings;
+				Category = WarningsObjC;
 			},
 			{
 					Name = "CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS";
@@ -1258,6 +1341,16 @@
 				Category = Warnings;
 			},
 			{
+				Name = "CLANG_WARN_ASSIGN_ENUM";
+				Type = Boolean;
+				DefaultValue = "NO";
+				CommandLineArgs = {
+					YES = ( "-Wassign-enum" );
+					NO	= ();
+				};
+				Category = Warnings;
+			},
+			{
 				Name = "GCC_WARN_SIGN_COMPARE";
 				Type = Boolean;
 				DefaultValue = NO;
@@ -1401,6 +1494,20 @@
 				Category = Preprocessing;
 			},
 			{
+				Name = "ENABLE_STRICT_OBJC_MSGSEND";
+				Type = Boolean;
+				DefaultValue = NO;
+				CommandLineArgs = {
+					NO = ();
+					YES = ("-DOBJC_OLD_DISPATCH_PROTOTYPES=0");
+				};
+				FileTypes = (
+					"sourcecode.c.objc",
+					"sourcecode.cpp.objcpp",
+				);
+				Category = Preprocessing;
+			},
+			{
 				Name = "USE_HEADERMAP";
 				Type = Boolean;
 				DefaultValue = YES;
@@ -1434,9 +1541,19 @@
 				DefaultValue = "$(TEMP_DIR)/$(PRODUCT_NAME)-all-target-headers.hmap";
 			},
 			{
+				Name = "CPP_HEADERMAP_FILE_FOR_ALL_NON_FRAMEWORK_TARGET_HEADERS";
+				Type = Path;
+				DefaultValue = "$(TEMP_DIR)/$(PRODUCT_NAME)-all-non-framework-target-headers.hmap";
+			},
+			{
 				Name = "CPP_HEADERMAP_FILE_FOR_PROJECT_FILES";
 				Type = Path;
 				DefaultValue = "$(TEMP_DIR)/$(PRODUCT_NAME)-project-headers.hmap";
+			},
+			{
+				Name = "CPP_HEADERMAP_PRODUCT_HEADERS_VFS_FILE";
+				Type = Path;
+				DefaultValue = "$(PROJECT_TEMP_DIR)/all-product-headers.yaml";
 			},
 			{
 				Name = "USE_HEADER_SYMLINKS";
@@ -1591,7 +1708,6 @@
 					YES = ( "-fstrict-aliasing" );
 					NO	= ( "-fno-strict-aliasing" );
 				};
-				Condition = "$(LLVM_IMPLICIT_AGGRESSIVE_OPTIMIZATIONS) == NO";
 				Category = CodeGeneration;
 			},
 			{
@@ -1987,6 +2103,44 @@
 				);
 				// Category is hidden -- used by iPhoneSimulator to match runtime OS setup;
 			},
+			
+			{
+				Name = "CLANG_INSTRUMENT_FOR_OPTIMIZATION_PROFILING";
+				Type = Boolean;
+				DefaultValue = NO;
+				CommandLineArgs = {
+					YES = (
+						"-fprofile-instr-generate",
+					);
+					NO = ();
+				};
+				AdditionalLinkerArgs = {
+					YES = (
+						"-fprofile-instr-generate",
+					);
+					NO = ();
+				};
+			},
+			{
+				Name = "CLANG_OPTIMIZATION_PROFILE_FILE";
+				Type = Path;
+				DefaultValue = "$(SRCROOT)/OptimizationProfiles/$(PROJECT_NAME).profdata";
+				Category = CodeGeneration;
+			},
+			{
+				Name = "CLANG_USE_OPTIMIZATION_PROFILE";
+				Type = Boolean;
+				DefaultValue = NO;
+				Category = CodeGeneration;
+				Condition = "! $(CLANG_INSTRUMENT_FOR_OPTIMIZATION_PROFILING)";
+				CommandLineArgs = {
+					YES = (
+						"-fprofile-instr-use=$(CLANG_OPTIMIZATION_PROFILE_FILE)",
+					);
+					NO = ();
+				};
+			},
+			
 			// These 4 settings are used by Xcode's migration tool.
 			// They should not be removed.
 			// They do not show up in the user visible build settings.
@@ -2061,7 +2215,6 @@
 		SupportsGeneratePreprocessedFile = YES;
 		SupportsGenerateAssemblyFile = YES;
 		CommandResultsPostprocessor = "XCClangResultsPostprocessor";
-		SupportsSerializedDiagnostics = YES;
 		DependencyInfoFile = "$(OutputDir)/$(OutputFileBase).d";
 		DependencyInfoArgs = ("-MMD", "-MT", "dependencies", "-MF", "$(DependencyInfoFile)");
 	},
@@ -2080,6 +2233,8 @@
 		// This is a workaround so that the analyzer ALWAYS uses the clang in the default toolchain.
 		ExecPath = "$(CLANG_ANALYZER_EXEC)";
 		RuleName = "Analyze$(CLANG_STATIC_ANALYZER_MODE_ACTION_$(CLANG_STATIC_ANALYZER_MODE)) $(InputFile)";
+		ExecDescription = "Analyze$(StaticAnalyzerModeNameDescription) $(InputFile)";
+		ProgressDescription = "Analyzing$(StaticAnalyzerModeNameDescription) $(CommandProgressByType) source files";
 		OutputDir = "$(CLANG_ANALYZER_OUTPUT_DIR)/StaticAnalyzer/$(PROJECT_NAME)/$(TARGET_NAME)/$(CURRENT_VARIANT)/$(CURRENT_ARCH)";
 		OutputFileExtension = plist;
 		OutputsAreProducts = YES;
@@ -2510,72 +2665,208 @@
 		);
 	},
 	{
-			Identifier = "com.apple.compilers.llvm.clang.nightly.migrator";
-			Type = Compiler;
-			BasedOn = "com.apple.compilers.llvm.clang.nightly";
-			Name = "ObjC Migrator";
-			Description = "Apple Clang ObjC Migrator";
-			Architectures = (
-				i386,
-				"x86_64",
-				armv6,
-				armv7,
-			);
-			ExecPath = "$(CLANG)";
-			OutputDir = "$(TEMP_DIR)/Migrator";
-			OutputFileExtension = remap;
-			OutputsAreProducts = YES;
-			IsAbstract = YES;
-			CommandResultsPostprocessor = "XCClangResultsPostprocessor";
-			SupportsSerializedDiagnostics = YES;
-			"ShowInCompilerSelectionPopup" = NO;
-			"ShowOnlySelfDefinedProperties" = YES;
-			SourceFileOption = "--migrate";
-			FileTypes = (
-				"sourcecode.c.objc",
-				"sourcecode.cpp.objcpp",
+		Identifier = "com.apple.compilers.llvm.clang.nightly.migrator";
+		Type = Compiler;
+		BasedOn = "com.apple.compilers.llvm.clang.nightly";
+		Name = "ObjC Migrator";
+		Description = "Apple Clang ObjC Migrator";
+		Architectures = (
+			i386,
+			"x86_64",
+			armv6,
+			armv7,
 		);
-			Options = (
-				{
-					Name = CLANG;
-					Type = Path;
-					DefaultValue = clang;
-				},
-			);
+		ExecPath = "$(CLANG)";
+		OutputDir = "$(TEMP_DIR)/Migrator";
+		OutputFileExtension = remap;
+		OutputsAreProducts = YES;
+		IsAbstract = YES;
+		CommandResultsPostprocessor = "XCClangResultsPostprocessor";
+		"ShowInCompilerSelectionPopup" = NO;
+		"ShowOnlySelfDefinedProperties" = YES;
+		SourceFileOption = "--migrate";
+		FileTypes = (
+			"sourcecode.c.objc",
+			"sourcecode.cpp.objcpp",
+		);
+		Options = (
+			{
+				Name = CLANG;
+				Type = Path;
+				DefaultValue = clang;
+			},
+			{
+					Name = "CLANG_MIGRATOR_READWRITE_PROPERTY";
+					DisplayName = "Infer readwrite properties";
+					Description = "Infer readwrite properties from a getter and setter method";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-readwrite-property" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_READONLY_PROPERTY";
+					DisplayName = "Infer readonly properties";
+					Description = "Infer readonly properties from getter methods";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-readonly-property" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_ANNOTATIONS";
+					DisplayName = "Add attribute annotations";
+					Description = "Add attribute annotations to properties and methods";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-annotation" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_INSTANCE_TYPE";
+					DisplayName = "Infer instancetype for method result type";
+					Description = "Infer instancetype for method result type instead of 'id'";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-instancetype" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_NSENUM_MACROS";
+					DisplayName = "Use NS_ENUM/NS_OPTIONS macros";
+					Description = "Use NS_ENUM/NS_OPTIONS macros for enumerators";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-ns-macros" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_PROTOCOL_CONFORMANCE";
+					DisplayName = "Infer protocol conformance";
+					Description = "Infer protocol conformance from the interface methods";
+					Type = Boolean;
+					DefaultValue = NO;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-protocol-conformance" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_PROPERTY_ATOMICITY";
+					DisplayName = "Atomicity of inferred properties";
+					Description = "Choose the atomicity of the inferred properties";
+					Type = Enumeration;
+					AllowedValues = (
+							nonatomic,
+							atomic,
+							NS_NONATOMIC_IOSONLY,
+					);
+					DefaultValue = NS_NONATOMIC_IOSONLY;
+					CommandLineArgs = {
+							nonatomic = ();
+							atomic = ( "-objcmt-atomic-property" );
+							NS_NONATOMIC_IOSONLY = ( "-objcmt-ns-nonatomic-iosonly" );
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_PUBLIC_HEADERS_ONLY";
+					DisplayName = "Only modify public headers";
+					Description = "Only modify public headers of a target";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-white-list-dir-path=$(TARGET_BUILD_DIR)/$(PUBLIC_HEADERS_FOLDER_PATH)" );
+							NO = ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_OBJC_LITERALS";
+					DisplayName = "ObjC literals";
+					Description = "Enable migration to modern ObjC literals syntax";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-literals", "-Qunused-arguments" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_OBJC_SUBSCRIPTING";
+					DisplayName = "ObjC subscripting";
+					Description = "Enable migration to modern ObjC subscripting syntax";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-subscripting", "-Qunused-arguments" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+			{
+					Name = "CLANG_MIGRATOR_OBJC_DESIGNATED_INIT";
+					DisplayName = "Infer designated initializer methods";
+					Description = "Infer NS_DESIGNATED_INITIALIZER for designated initializer methods";
+					Type = Boolean;
+					DefaultValue = YES;
+					CommandLineArgs = {
+							YES = ( "-objcmt-migrate-designated-init", "-Qunused-arguments" );
+							NO	= ();
+					};
+					Category = "Modernizer";
+			},
+		);
 	},
 	{
-			Identifier = "com.apple.compilers.llvm.clang.nightly.migrator.xctest";
-			Type = Compiler;
-			BasedOn = "com.apple.compilers.llvm.clang.nightly";
-			Name = "XCTest Migrator";
-			Description = "Apple Clang XCTest Migrator";
-			Architectures = (
-				i386,
-				"x86_64",
-				armv6,
-				armv7,
-			);
-			ExecPath = "$(CLANG)";
-			OutputDir = "$(TEMP_DIR)/Migrator";
-			OutputFileExtension = remap;
-			OutputsAreProducts = YES;
-			IsAbstract = YES;
-			CommandResultsPostprocessor = "XCClangResultsPostprocessor";
-			SupportsSerializedDiagnostics = YES;
-			"ShowInCompilerSelectionPopup" = NO;
-			"ShowOnlySelfDefinedProperties" = YES;
-			SourceFileOption = "--migrate-xct";
-			FileTypes = (
-				"sourcecode.c.objc",
-				"sourcecode.cpp.objcpp",
+		Identifier = "com.apple.compilers.llvm.clang.nightly.migrator.xctest";
+		Type = Compiler;
+		BasedOn = "com.apple.compilers.llvm.clang.nightly";
+		Name = "XCTest Migrator";
+		Description = "Apple Clang XCTest Migrator";
+		Architectures = (
+			i386,
+			"x86_64",
+			armv6,
+			armv7,
 		);
-			Options = (
-				{
-					Name = CLANG;
-					Type = Path;
-					DefaultValue = clang;
-				},
-			);
+		ExecPath = "$(CLANG)";
+		OutputDir = "$(TEMP_DIR)/Migrator";
+		OutputFileExtension = remap;
+		OutputsAreProducts = YES;
+		IsAbstract = YES;
+		CommandResultsPostprocessor = "XCClangResultsPostprocessor";
+		"ShowInCompilerSelectionPopup" = NO;
+		"ShowOnlySelfDefinedProperties" = YES;
+		SourceFileOption = "--migrate-xct";
+		FileTypes = (
+			"sourcecode.c.objc",
+			"sourcecode.cpp.objcpp",
+		);
+		Options = (
+			{
+				Name = CLANG;
+				Type = Path;
+				DefaultValue = clang;
+			},
+		);
 	},
 	{
 		Identifier = "com.apple.compilers.llvm.clang.nightly.astbuilder";
