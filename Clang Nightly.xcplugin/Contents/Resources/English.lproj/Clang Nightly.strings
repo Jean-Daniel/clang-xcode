@@ -105,7 +105,7 @@ GNU++11: Accept the ISO C++ 2011 standard with amendments and GNU extensions. [-
 
 C++14: Accept the ISO C++ 2014 standard with amendments, but not GNU extensions. [-std=c++14]
 
-GNU++11: Accept the ISO C++ 2014 standard with amendments and GNU extensions. [-std=gnu++14]
+GNU++14: Accept the ISO C++ 2014 standard with amendments and GNU extensions. [-std=gnu++14]
 
 Compiler Default: Tells the compiler to use its default C++ language dialect. This is normally the best choice unless you have specific needs. (Currently equivalent to GNU++98.)
 
