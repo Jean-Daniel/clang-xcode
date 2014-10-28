@@ -10,7 +10,7 @@
 		Name = "Clang Nightly";
 		Description = "Clang Nightly Build";
 		Vendor = Apple;
-		Version = "3.5";
+		Version = "3.6";
 		IsAbstract = NO;
 		ShowInCompilerSelectionPopup = YES;
 		FileTypes = (
@@ -449,7 +449,7 @@
 				DefaultValue = YES;
 				CommandLineArgs = {
 					NO = ();
-					YES = ("-fmodule-implementation-of", "$(PRODUCT_MODULE_NAME)");
+					YES = ("-Xclang", "-fmodule-implementation-of", "-Xclang", "$(PRODUCT_MODULE_NAME)");
 				};
 				Condition = "$(CLANG_ENABLE_MODULES) == YES && $(DEFINES_MODULE) == YES";
 			},
