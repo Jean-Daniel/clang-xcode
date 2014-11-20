@@ -1,15 +1,14 @@
 //
 // Clang Nightly build task
-// Copyright (c) 2000-2014 Apple Inc.  All rights reserved.
 //
 (
 	{
-		Identifier = "com.apple.compilers.llvm.clang.nightly";
+		Identifier = "com.xenonium.compilers.llvm.clang.nightly";
 		Type = Compiler;
 		Class = "XCCompilerSpecificationClang";
 		Name = "Clang Nightly";
 		Description = "Clang Nightly Build";
-		Vendor = Apple;
+		Vendor = Xenonium;
 		Version = "3.6";
 		IsAbstract = NO;
 		ShowInCompilerSelectionPopup = YES;
@@ -2191,9 +2190,9 @@
 		);
 	},
 	{
-		Identifier = "com.apple.compilers.llvm.clang.nightly.compiler";
+		Identifier = "com.xenonium.compilers.llvm.clang.nightly.compiler";
 		Type = Compiler;
-		BasedOn = "com.apple.compilers.llvm.clang.nightly";
+		BasedOn = "com.xenonium.compilers.llvm.clang.nightly";
 		Name = "Clang Nightly";
 		Description = "Clang Nightly Build";
 		IsAbstract = YES;
@@ -2219,9 +2218,9 @@
 		DependencyInfoArgs = ("-MMD", "-MT", "dependencies", "-MF", "$(DependencyInfoFile)");
 	},
 	{
-		Identifier = "com.apple.compilers.llvm.clang.nightly.analyzer";
+		Identifier = "com.xenonium.compilers.llvm.clang.nightly.analyzer";
 		Type = Compiler;
-		BasedOn = "com.apple.compilers.llvm.clang.nightly";
+		BasedOn = "com.xenonium.compilers.llvm.clang.nightly";
 		Name = "Static Analyzer";
 		Description = "Clang Static Analyzer Nightly Build";
 		Architectures = (
@@ -2665,11 +2664,11 @@
 		);
 	},
 	{
-		Identifier = "com.apple.compilers.llvm.clang.nightly.migrator";
+		Identifier = "com.xenonium.compilers.llvm.clang.nightly.migrator";
 		Type = Compiler;
-		BasedOn = "com.apple.compilers.llvm.clang.nightly";
+		BasedOn = "com.xenonium.compilers.llvm.clang.nightly";
 		Name = "ObjC Migrator";
-		Description = "Apple Clang ObjC Migrator";
+		Description = "Xenonium Clang ObjC Migrator";
 		Architectures = (
 			i386,
 			"x86_64",
@@ -2836,11 +2835,11 @@
 		);
 	},
 	{
-		Identifier = "com.apple.compilers.llvm.clang.nightly.migrator.xctest";
+		Identifier = "com.xenonium.compilers.llvm.clang.nightly.migrator.xctest";
 		Type = Compiler;
-		BasedOn = "com.apple.compilers.llvm.clang.nightly";
+		BasedOn = "com.xenonium.compilers.llvm.clang.nightly";
 		Name = "XCTest Migrator";
-		Description = "Apple Clang XCTest Migrator";
+		Description = "Xenonium Clang XCTest Migrator";
 		Architectures = (
 			i386,
 			"x86_64",
@@ -2869,11 +2868,11 @@
 		);
 	},
 	{
-		Identifier = "com.apple.compilers.llvm.clang.nightly.astbuilder";
+		Identifier = "com.xenonium.compilers.llvm.clang.nightly.astbuilder";
 		Type = Compiler;
-		BasedOn = "com.apple.compilers.llvm.clang.nightly";
+		BasedOn = "com.xenonium.compilers.llvm.clang.nightly";
 		Name = "AST Builder";
-		Description = "Apple Clang AST Builder 1.0";
+		Description = "Xenonium Clang AST Builder 1.0";
 		FileTypes = (
 			"sourcecode.c.c",
 			"sourcecode.c.objc",

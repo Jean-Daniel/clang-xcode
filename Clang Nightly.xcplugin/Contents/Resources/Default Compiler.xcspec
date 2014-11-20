@@ -1,17 +1,14 @@
 /**
     Default compiler specification
-
-    Copyright (c) 2000-2012 Apple Inc.
-	All Rights Reserved.
 */
 
 {   Type = Compiler;
-    Identifier = com.apple.compilers.gcc;
+    Identifier = com.xenonium.compilers.gcc;
     Class = PBXCompilerSpecificationGcc;
     Name = "Default Compiler";
     Description = "Default Compiler";
     Version = "Default";
-    Vendor = "Apple";
+    Vendor = "Xenonium";
     Architectures = (
         i386,
         ppc,

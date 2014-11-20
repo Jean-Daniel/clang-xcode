@@ -3,15 +3,13 @@
 // Xcode Compiler Specification
 // English localization
 //
-// Copyright (c) 2009-2014 Apple Inc.  All rights reserved.
-//
 
 // Localized strings for basic info
 
 "Name" = "Clang Nightly";
 "Description" = "Clang Compiler Nightly Build";
 "Version" = "3.5";
-"Vendor" = "Apple";
+"Vendor" = "Xenonium";
 
 // Localized strings for compiler options
 
@@ -320,7 +318,7 @@ This option does not warn about designated initializers, so the following modifi
 "[CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES]-value-[YES]" = "Yes";
 
 "[CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS]-name" = "Implicit Synthesized Properties";
-"[CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS]-description" = "Starting in Xcode 4.4, the Apple LLVM Compiler will implicitly synthesize properties that are not
+"[CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS]-description" = "Starting in Xcode 4.4, the LLVM Compiler will implicitly synthesize properties that are not
 explicitly synthesized using @synthesize.  This warning warns about such implicit behavior, even though the property is still synthesized.  This is essentially a backwards compatability warning, or for those who wish to continue to explicitly use @synthesize.";
 "[CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS]-value-[NO]" = "No";
 "[CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS]-value-[YES]" = "Yes";
@@ -544,7 +542,7 @@ With this setting, the compiler's goal is to reduce the cost of compilation and 
 
 Fast: Optimizing compilation takes somewhat more time, and a lot more memory for a large function. [-O, -O1]
 
- With this setting, the compiler tries to reduce code size and execution time, without performing any optimizations that take a great deal of compilation time. In Apple's compiler, strict aliasing, block reordering, and inter-block scheduling are disabled by default when optimizing.
+ With this setting, the compiler tries to reduce code size and execution time, without performing any optimizations that take a great deal of compilation time. In LLVM's compiler, strict aliasing, block reordering, and inter-block scheduling are disabled by default when optimizing.
 
 Faster: The compiler performs nearly all supported optimizations that do not involve a space-speed tradeoff. [-O2]
 
