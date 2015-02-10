@@ -6,17 +6,17 @@
 	<dict>
 		<key>Resources/Clang Nightly.xcspec</key>
 		<data>
-		Fd7SfRNIi+j/WcRPvi0CoRDW8NQ=
+		O2ODePKUzSspl4BqvGsNYczodj8=
 		</data>
 		<key>Resources/Default Compiler.xcspec</key>
 		<data>
-		06q/PFx4DaerpAf3vgDs0+l9S9o=
+		/AX/XaN1cZGxGbapvHQN/SAJTc8=
 		</data>
 		<key>Resources/English.lproj/Clang Nightly.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KFZeer9HuzRa98Ne+JVRDD1LPjo=
+			zsdzBPsfaVCjHNA6+NC9E87dsFU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -25,31 +25,31 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+EB59dxrt/Hsp46gs7CxwSOt6og=
+			sg9fLF49Dt1uASeBCsVKhD24uDc=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>version.plist</key>
 		<data>
-		90qyfDd4wlEUgGtkUeE19bSPagg=
+		GiDo+5heVJO61rbg4M2zcKhiw7I=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Resources/Clang Nightly.xcspec</key>
 		<data>
-		Fd7SfRNIi+j/WcRPvi0CoRDW8NQ=
+		O2ODePKUzSspl4BqvGsNYczodj8=
 		</data>
 		<key>Resources/Default Compiler.xcspec</key>
 		<data>
-		06q/PFx4DaerpAf3vgDs0+l9S9o=
+		/AX/XaN1cZGxGbapvHQN/SAJTc8=
 		</data>
 		<key>Resources/English.lproj/Clang Nightly.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KFZeer9HuzRa98Ne+JVRDD1LPjo=
+			zsdzBPsfaVCjHNA6+NC9E87dsFU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -58,14 +58,14 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+EB59dxrt/Hsp46gs7CxwSOt6og=
+			sg9fLF49Dt1uASeBCsVKhD24uDc=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>version.plist</key>
 		<data>
-		90qyfDd4wlEUgGtkUeE19bSPagg=
+		GiDo+5heVJO61rbg4M2zcKhiw7I=
 		</data>
 	</dict>
 	<key>rules</key>

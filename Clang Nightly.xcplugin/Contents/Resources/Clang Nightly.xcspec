@@ -9,7 +9,7 @@
 		Name = "Clang Nightly";
 		Description = "Clang Nightly Build";
 		Vendor = Xenonium;
-		Version = "3.6";
+		Version = "3.7";
 		IsAbstract = NO;
 		ShowInCompilerSelectionPopup = YES;
 		FileTypes = (
@@ -416,17 +416,18 @@
 				// Hidden.
 			},
 			{
-				Name = "CLANG_MODULES_VALIDATION_TIMESTAMP";
+				Name = "CLANG_MODULES_BUILD_SESSION_FILE";
 				Type = String;
 				DefaultValue = "";
 				CommandLineArgs = {
 					"" = ();
 					"<<otherwise>>" = (
-						"-fbuild-session-timestamp=$(value)",
+						"-fbuild-session-file=$(value)",
 						"-fmodules-validate-once-per-build-session",
 					);
 				};
 				Condition = "$(CLANG_ENABLE_MODULES) == YES";
+				SupportedVersionRanges = ( "602.0.0" );
 			},
 			{
 				Name = "CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES";
