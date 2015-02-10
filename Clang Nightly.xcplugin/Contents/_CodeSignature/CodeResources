@@ -6,13 +6,13 @@
 	<dict>
 		<key>Resources/Clang LLVM 1.0.xcspec</key>
 		<data>
-		fc1RB7o3hIGXx6RvE/z2IaNQeTE=
+		hF6XD3JMNSYalrZlF4/MqlPh5mw=
 		</data>
 		<key>Resources/Default Compiler.xcspec</key>
 		<data>
 		06q/PFx4DaerpAf3vgDs0+l9S9o=
 		</data>
-		<key>Resources/English.lproj/Apple LLVM 6.0.strings</key>
+		<key>Resources/English.lproj/Apple LLVM 6.1.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -32,20 +32,20 @@
 		</dict>
 		<key>version.plist</key>
 		<data>
-		90qyfDd4wlEUgGtkUeE19bSPagg=
+		GiDo+5heVJO61rbg4M2zcKhiw7I=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Resources/Clang LLVM 1.0.xcspec</key>
 		<data>
-		fc1RB7o3hIGXx6RvE/z2IaNQeTE=
+		hF6XD3JMNSYalrZlF4/MqlPh5mw=
 		</data>
 		<key>Resources/Default Compiler.xcspec</key>
 		<data>
 		06q/PFx4DaerpAf3vgDs0+l9S9o=
 		</data>
-		<key>Resources/English.lproj/Apple LLVM 6.0.strings</key>
+		<key>Resources/English.lproj/Apple LLVM 6.1.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -65,7 +65,7 @@
 		</dict>
 		<key>version.plist</key>
 		<data>
-		90qyfDd4wlEUgGtkUeE19bSPagg=
+		GiDo+5heVJO61rbg4M2zcKhiw7I=
 		</data>
 	</dict>
 	<key>rules</key>

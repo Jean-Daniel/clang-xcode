@@ -1,5 +1,5 @@
 //
-// LLVM 6.0 compiler build task
+// LLVM 6.1 compiler build task
 // Copyright (c) 2000-2014 Apple Inc.  All rights reserved.
 //
 (
@@ -7,8 +7,8 @@
 		Identifier = "com.apple.compilers.llvm.clang.1_0";
 		Type = Compiler;
 		Class = "XCCompilerSpecificationClang";
-		Name = "Apple LLVM 6.0";
-		Description = "Apple LLVM 6.0 compiler";
+		Name = "Apple LLVM 6.1";
+		Description = "Apple LLVM 6.1 compiler";
 		Vendor = Apple;
 		Version = "5.0";
 		IsAbstract = NO;
@@ -386,17 +386,18 @@
 				// Hidden.
 			},
 			{
-				Name = "CLANG_MODULES_VALIDATION_TIMESTAMP";
+				Name = "CLANG_MODULES_BUILD_SESSION_FILE";
 				Type = String;
 				DefaultValue = "";
 				CommandLineArgs = {
 					"" = ();
 					"<<otherwise>>" = (
-						"-fbuild-session-timestamp=$(value)",
+						"-fbuild-session-file=$(value)",
 						"-fmodules-validate-once-per-build-session",
 					);
 				};
 				Condition = "$(CLANG_ENABLE_MODULES) == YES";
+				SupportedVersionRanges = ( "602.0.0" );
 			},
 			{
 				Name = "CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES";
@@ -418,7 +419,7 @@
 				DefaultValue = YES;
 				CommandLineArgs = {
 					NO = ();
-					YES = ("-fmodule-implementation-of", "$(PRODUCT_MODULE_NAME)");
+					YES = ("-Xclang", "-fmodule-implementation-of", "-Xclang", "$(PRODUCT_MODULE_NAME)");
 				};
 				Condition = "$(CLANG_ENABLE_MODULES) == YES && $(DEFINES_MODULE) == YES";
 			},
@@ -2143,8 +2144,8 @@
 		Identifier = "com.apple.compilers.llvm.clang.1_0.compiler";
 		Type = Compiler;
 		BasedOn = "com.apple.compilers.llvm.clang.1_0";
-		Name = "Apple LLVM 6.0";
-		Description = "Apple LLVM 6.0 compiler";
+		Name = "Apple LLVM 6.1";
+		Description = "Apple LLVM 6.1 compiler";
 		IsAbstract = YES;
 		ShowInCompilerSelectionPopup = NO;
 		Architectures = (
